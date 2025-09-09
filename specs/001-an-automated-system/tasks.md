@@ -8,12 +8,12 @@
 - [x] T003 [P] Install required dependencies: `express`, `prisma`, `@prisma/client`, `mysql2`, `@huggingface/inference`, `bullmq`.
 - [x] T004 [P] Install development dependencies: `typescript`, `@types/node`, `@types/express`, `jest`, `ts-jest`, `supertest`, `eslint`, `prettier`.
 - [x] T005 [P] Configure ESLint and Prettier in `backend/`.
-- [x] T006 [P] Create a `docker-compose.yml` file for MySQL and Redis services.
+- [x] T006 [P] Create a `docker-compose.yml` file for MySQL, Redis, and backend services.
 - [x] T007 Create the Prisma schema at `backend/prisma/schema.prisma` based on `data-model.md`.
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
-- [ ] T008 [P] Write a contract test for `POST /webhooks/sendgrid` in `backend/tests/contract/sendgrid.test.ts`.
-- [ ] T009 [P] Write contract tests for `GET` and `POST /categories` in `backend/tests/contract/categories.test.ts`.
+- [x] T008 [P] Write a contract test for `POST /webhooks/sendgrid` in `backend/tests/contract/sendgrid.test.ts`.
+- [x] T009 [P] Write contract tests for `GET` and `POST /categories` in `backend/tests/contract/categories.test.ts`.
 - [ ] T010 [P] Write contract tests for `PUT` and `DELETE /categories/{id}` in `backend/tests/contract/categories.test.ts`.
 - [ ] T011 [P] Write a contract test for `GET /emails` in `backend/tests/contract/emails.test.ts`.
 - [ ] T012 [P] Write an integration test in `backend/tests/integration/email-processing.test.ts` to verify that an email received from the SendGrid webhook is processed and saved to the database.
@@ -23,14 +23,14 @@
 - [ ] T014 Run `npx prisma migrate dev --name init` to create the initial database schema.
 - [ ] T015 [P] Implement the Category service (`backend/src/services/categoryService.ts`) with methods for CRUD operations.
 - [ ] T016 [P] Implement the Email service (`backend/src/services/emailService.ts`) with methods for creating and retrieving emails.
-- [ ] T017 Implement the API endpoints for category management in `backend/src/api/categoryRoutes.ts`.
+- [x] T017 Implement the API endpoints for category management in `backend/src/api/categoryRoutes.ts`.
 - [ ] T018 Implement the API endpoint for listing emails in `backend/src/api/emailRoutes.ts`.
-- [ ] T019 Implement the SendGrid webhook endpoint in `backend/src/api/sendgridRoutes.ts`.
+- [x] T019 Implement the SendGrid webhook endpoint in `backend/src/api/sendgridRoutes.ts`.
 
 ## Phase 3.4: Integration
 - [ ] T020 Integrate Prisma Client in the Category and Email services.
-- [ ] T021 Implement the queue producer in the SendGrid webhook endpoint to add incoming emails to a BullMQ queue.
-- [ ] T022 Implement a queue worker (`backend/src/workers/emailProcessor.ts`) that processes emails from the queue, calls the Hugging Face API for classification, and saves the result.
+- [x] T021 Implement the queue producer in the SendGrid webhook endpoint to add incoming emails to a BullMQ queue.
+- [x] T022 Implement a queue worker (`backend/src/workers/emailProcessor.ts`) that processes emails from the queue, calls the Hugging Face API for classification, and saves the result.
 - [ ] T023 Implement error handling and logging middleware in the Express application.
 
 ## Phase 3.5: Polish

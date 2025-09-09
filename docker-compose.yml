@@ -21,6 +21,20 @@ services:
     volumes:
       - redis_data:/data
 
+  backend:
+    build: ./backend
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: mysql://user:password@mysql:3306/email_classifier
+      HUGGING_FACE_API_TOKEN: ${HUGGING_FACE_API_TOKEN}
+      SENDGRID_WEBHOOK_SECRET: ${SENDGRID_WEBHOOK_SECRET}
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./backend:/app
+
 volumes:
   mysql_data:
   redis_data:
