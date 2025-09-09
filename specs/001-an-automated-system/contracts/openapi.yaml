@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: Automated Email Classification API
+  version: 1.0.0
+paths:
+  /webhooks/sendgrid:
+    post:
+      summary: Receive email from SendGrid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                messageId:
+                  type: string
+                subject:
+                  type: string
+                from:
+                  type: string
+                text:
+                  type: string
+      responses:
+        '200':
+          description: Email received and queued for processing.
+  /categories:
+    get:
+      summary: List all categories
+      responses:
+        '200':
+          description: A list of categories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+    post:
+      summary: Create a new category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCategory'
+      responses:
+        '201':
+          description: Category created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+  /categories/{id}:
+    put:
+      summary: Update a category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCategory'
+      responses:
+        '200':
+          description: Category updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+    delete:
+      summary: Delete a category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Category deleted.
+  /emails:
+    get:
+      summary: List emails
+      parameters:
+        - name: categoryId
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of emails.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Email'
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        parentId:
+          type: integer
+          nullable: true
+    NewCategory:
+      type: object
+      properties:
+        name:
+          type: string
+        parentId:
+          type: integer
+          nullable: true
+    Email:
+      type: object
+      properties:
+        id:
+          type: integer
+        subject:
+          type: string
+        from:
+          type: string
+        receivedAt:
+          type: string
+          format: date-time
+        category:
+          $ref: '#/components/schemas/Category'

@@ -1,0 +1,29 @@
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = "mysql://user:password@localhost:3306/email_classifier_shadow"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Category {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  parentId  Int?
+  parent    Category?  @relation("SubCategories", fields: [parentId], references: [id])
+  children  Category[] @relation("SubCategories")
+  emails    Email[]
+}
+
+model Email {
+  id                Int      @id @default(autoincrement())
+  sendgridMessageId String   @unique
+  subject           String?
+  from              String
+  body              String?
+  receivedAt        DateTime @default(now())
+  categoryId        Int?
+  category          Category? @relation(fields: [categoryId], references: [id])
+}
