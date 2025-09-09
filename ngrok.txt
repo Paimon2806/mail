@@ -1,23 +1,16 @@
 ngrok config add-authtoken 32SLJmZN7mIcOR8m0El1guycZdd_4xWk3p1c34QXgZdymQ2pD
 ngrok http http://localhost:8080
 
-Session Status                online
-Account                       anurag.jyotishi@bosctechlabs.com (Plan: Free)
-Update                        update available (version 3.27.0, Ctrl-U to update)
-Version                       3.24.0-msix
-Region                        India (in)
-Web Interface                 http://127.0.0.1:4040
-Forwarding                    https://d7ce1deddfc9.ngrok-free.app -> http://localhost:3000
-
-Connections                   ttl     opn     rt1     rt5     p50     p90     
-                              0       0       0.00    0.00    0.00    0.00  
+ngrok                                                                                                     (Ctrl+C to quit)                                                                                                                          �  Block threats before they reach your services with new WAF actions → https://ngrok.com/r/waf                          
 
 
-
-Email sent to any address in the receiving domain will be processed by Inbound Parse and POSTed to the destination URL. Learn more  .
 
 Receiving Domain Also known as the hostname. We parse email sent to any address within this domain. Add a subdomain like "parse" to ensure only those emails are processed.
 cabworld.co.in
 
 Destination URL The URL must be accessible from the public web.
-https://d7ce1deddfc9.ngrok-free.app
+https://dd3b4f0bde6e.ngrok-free.app/webhooks/sendgrid
+
+Additional Options
+Check incoming emails for spam
+POST the raw, full MIME message
