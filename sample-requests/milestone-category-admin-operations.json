@@ -1,0 +1,339 @@
+{
+  "getDefaultCategories": {
+    "method": "GET",
+    "endpoint": "/milestone-categories/admin/default",
+    "description": "Get all default milestone categories (admin only)",
+    "headers": {
+      "Authorization": "Bearer ADMIN_FIREBASE_TOKEN"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Default milestone categories retrieved successfully",
+      "data": [
+        {
+          "id": "category-uuid-1",
+          "name": "Relationship Moments",
+          "description": "Special moments with loved ones and relationships",
+          "icon": "❤️",
+          "color": "#FF6B6B",
+          "isPublic": true,
+          "isActive": true,
+          "sortOrder": 1,
+          "userId": null,
+          "metadata": null,
+          "createdAt": "2024-01-01T00:00:00Z",
+          "updatedAt": "2024-01-01T00:00:00Z",
+          "milestoneCount": 0
+        },
+        {
+          "id": "category-uuid-2",
+          "name": "Family Life",
+          "description": "Family milestones and precious family moments",
+          "icon": "👨‍👩‍👧",
+          "color": "#4ECDC4",
+          "isPublic": true,
+          "isActive": true,
+          "sortOrder": 2,
+          "userId": null,
+          "metadata": null,
+          "createdAt": "2024-01-01T00:00:00Z",
+          "updatedAt": "2024-01-01T00:00:00Z",
+          "milestoneCount": 0
+        }
+      ]
+    }
+  },
+  "createDefaultCategory": {
+    "method": "POST",
+    "endpoint": "/milestone-categories/admin/default",
+    "description": "Create a new default milestone category (admin only)",
+    "headers": {
+      "Authorization": "Bearer ADMIN_FIREBASE_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "New Category",
+      "description": "Description for the new category",
+      "icon": "🌟",
+      "color": "#FF5733",
+      "sortOrder": 7
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Default milestone category created successfully",
+      "data": {
+        "id": "category-uuid-new",
+        "name": "New Category",
+        "description": "Description for the new category",
+        "icon": "🌟",
+        "color": "#FF5733",
+        "isPublic": true,
+        "isActive": true,
+        "sortOrder": 7,
+        "userId": null,
+        "metadata": null,
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z",
+        "milestoneCount": 0
+      }
+    }
+  },
+  "updateDefaultCategory": {
+    "method": "PUT",
+    "endpoint": "/milestone-categories/admin/default/{id}",
+    "description": "Update a default milestone category (admin only)",
+    "headers": {
+      "Authorization": "Bearer ADMIN_FIREBASE_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "pathParams": {
+      "id": "category-uuid-1"
+    },
+    "body": {
+      "name": "Updated Life Events",
+      "description": "Updated description for life events",
+      "icon": "🎊",
+      "color": "#FF8C8C"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Default milestone category updated successfully",
+      "data": {
+        "id": "category-uuid-1",
+        "name": "Updated Life Events",
+        "description": "Updated description for life events",
+        "icon": "🎊",
+        "color": "#FF8C8C",
+        "isPublic": true,
+        "isActive": true,
+        "sortOrder": 1,
+        "userId": null,
+        "metadata": null,
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z",
+        "milestoneCount": 0
+      }
+    }
+  },
+  "deleteDefaultCategory": {
+    "method": "DELETE",
+    "endpoint": "/milestone-categories/admin/default/{id}",
+    "description": "Delete a default milestone category (admin only)",
+    "headers": {
+      "Authorization": "Bearer ADMIN_FIREBASE_TOKEN"
+    },
+    "pathParams": {
+      "id": "category-uuid-1"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Default milestone category deleted successfully",
+      "data": {
+        "success": true,
+        "message": "Default milestone category deleted successfully"
+      }
+    }
+  },
+  "seedDefaultCategories": {
+    "method": "POST",
+    "endpoint": "/milestone-categories/admin/seed-defaults",
+    "description": "Seed the 6 default milestone categories (admin only)",
+    "headers": {
+      "Authorization": "Bearer ADMIN_FIREBASE_TOKEN"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Default milestone categories seeded successfully",
+      "data": {
+        "success": true,
+        "message": "Successfully seeded 6 default categories",
+        "categories": [
+          {
+            "id": "category-uuid-1",
+            "name": "Relationship Moments",
+            "description": "Special moments with loved ones and relationships",
+            "icon": "❤️",
+            "color": "#FF6B6B",
+            "isPublic": true,
+            "isActive": true,
+            "sortOrder": 1,
+            "userId": null,
+            "metadata": null,
+            "createdAt": "2024-01-01T00:00:00Z",
+            "updatedAt": "2024-01-01T00:00:00Z",
+            "milestoneCount": 0
+          },
+          {
+            "id": "category-uuid-2",
+            "name": "Family Life",
+            "description": "Family milestones and precious family moments",
+            "icon": "👨‍👩‍👧",
+            "color": "#4ECDC4",
+            "isPublic": true,
+            "isActive": true,
+            "sortOrder": 2,
+            "userId": null,
+            "metadata": null,
+            "createdAt": "2024-01-01T00:00:00Z",
+            "updatedAt": "2024-01-01T00:00:00Z",
+            "milestoneCount": 0
+          },
+          {
+            "id": "category-uuid-3",
+            "name": "Home Sweet Home",
+            "description": "Home-related achievements and milestones",
+            "icon": "🏠",
+            "color": "#45B7D1",
+            "isPublic": true,
+            "isActive": true,
+            "sortOrder": 3,
+            "userId": null,
+            "metadata": null,
+            "createdAt": "2024-01-01T00:00:00Z",
+            "updatedAt": "2024-01-01T00:00:00Z",
+            "milestoneCount": 0
+          },
+          {
+            "id": "category-uuid-4",
+            "name": "Travel & Adventures",
+            "description": "Travel experiences and adventure milestones",
+            "icon": "🚗",
+            "color": "#96CEB4",
+            "isPublic": true,
+            "isActive": true,
+            "sortOrder": 4,
+            "userId": null,
+            "metadata": null,
+            "createdAt": "2024-01-01T00:00:00Z",
+            "updatedAt": "2024-01-01T00:00:00Z",
+            "milestoneCount": 0
+          },
+          {
+            "id": "category-uuid-5",
+            "name": "My gratitude",
+            "description": "Moments of gratitude and appreciation",
+            "icon": "📖",
+            "color": "#FFEAA7",
+            "isPublic": true,
+            "isActive": true,
+            "sortOrder": 5,
+            "userId": null,
+            "metadata": null,
+            "createdAt": "2024-01-01T00:00:00Z",
+            "updatedAt": "2024-01-01T00:00:00Z",
+            "milestoneCount": 0
+          },
+          {
+            "id": "category-uuid-6",
+            "name": "Everyday Wins",
+            "description": "Small victories and daily achievements",
+            "icon": "🏅",
+            "color": "#DDA0DD",
+            "isPublic": true,
+            "isActive": true,
+            "sortOrder": 6,
+            "userId": null,
+            "metadata": null,
+            "createdAt": "2024-01-01T00:00:00Z",
+            "updatedAt": "2024-01-01T00:00:00Z",
+            "milestoneCount": 0
+          }
+        ]
+      }
+    }
+  },
+  "getPublicCategories": {
+    "method": "GET",
+    "endpoint": "/milestone-categories/public",
+    "description": "Get all public milestone categories (for regular users)",
+    "headers": {
+      "Authorization": "Bearer USER_FIREBASE_TOKEN"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Public milestone categories retrieved successfully",
+      "data": [
+        {
+          "id": "category-uuid-1",
+          "name": "Life Events",
+          "description": "Major life milestones and celebrations",
+          "icon": "🎉",
+          "color": "#FF6B6B",
+          "isPublic": true,
+          "isActive": true,
+          "sortOrder": 1,
+          "userId": null,
+          "metadata": null,
+          "createdAt": "2024-01-01T00:00:00Z",
+          "updatedAt": "2024-01-01T00:00:00Z",
+          "milestoneCount": 0
+        }
+      ]
+    }
+  },
+  "getPersonalCategories": {
+    "method": "GET",
+    "endpoint": "/milestone-categories/personal",
+    "description": "Get user's personal milestone categories",
+    "headers": {
+      "Authorization": "Bearer USER_FIREBASE_TOKEN"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Personal milestone categories retrieved successfully",
+      "data": [
+        {
+          "id": "personal-category-uuid-1",
+          "name": "My Custom Category",
+          "description": "A personal category I created",
+          "icon": "⭐",
+          "color": "#FFD700",
+          "isPublic": false,
+          "isActive": true,
+          "sortOrder": 0,
+          "userId": "user-uuid-here",
+          "metadata": null,
+          "createdAt": "2024-01-01T00:00:00Z",
+          "updatedAt": "2024-01-01T00:00:00Z",
+          "milestoneCount": 0
+        }
+      ]
+    }
+  },
+  "createPersonalCategory": {
+    "method": "POST",
+    "endpoint": "/milestone-categories/",
+    "description": "Create a personal milestone category",
+    "headers": {
+      "Authorization": "Bearer USER_FIREBASE_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "My Personal Category",
+      "description": "A category I created for my milestones",
+      "icon": "⭐",
+      "color": "#FFD700",
+      "isPublic": false,
+      "sortOrder": 0
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Milestone category created successfully",
+      "data": {
+        "id": "personal-category-uuid-2",
+        "name": "My Personal Category",
+        "description": "A category I created for my milestones",
+        "icon": "⭐",
+        "color": "#FFD700",
+        "isPublic": false,
+        "isActive": true,
+        "sortOrder": 0,
+        "userId": "user-uuid-here",
+        "metadata": null,
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z",
+        "milestoneCount": 0
+      }
+    }
+  }
+}

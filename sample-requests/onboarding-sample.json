@@ -1,0 +1,218 @@
+{
+  "name": "Sample Onboarding Flow",
+  "description": "Example requests for the onboarding system",
+  "endpoints": {
+    "getQuestions": {
+      "method": "GET",
+      "url": "/rest/onboarding/questions",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get all active onboarding questions"
+    },
+    "submitOnboarding": {
+      "method": "POST",
+      "url": "/rest/onboarding/submit",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "responses": [
+          {
+            "questionId": "q1-priorities",
+            "selectedOptionIds": ["opt-backup-docs", "opt-family-easier"]
+          },
+          {
+            "questionId": "q2-family",
+            "selectedOptionIds": ["opt-children", "opt-pets"]
+          },
+          {
+            "questionId": "q3-employment",
+            "selectedOptionId": "opt-selfemployed"
+          },
+          {
+            "questionId": "q4-investments",
+            "selectedOptionIds": ["opt-shares", "opt-crypto"]
+          }
+        ]
+      },
+      "description": "Submit onboarding responses and create user folders"
+    },
+    "getStatus": {
+      "method": "GET",
+      "url": "/rest/onboarding/status",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get user onboarding status and responses"
+    },
+    "updateOnboarding": {
+      "method": "PUT",
+      "url": "/rest/onboarding/update",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "responses": [
+          {
+            "questionId": "q1-priorities",
+            "selectedOptionIds": ["opt-backup-docs", "opt-memories"]
+          }
+        ]
+      },
+      "description": "Update onboarding responses and recreate folders"
+    }
+  },
+  "folderEndpoints": {
+    "getUserFolders": {
+      "method": "GET",
+      "url": "/rest/folders/",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get all user folders"
+    },
+    "getFolderHierarchy": {
+      "method": "GET",
+      "url": "/rest/folders/hierarchy",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get folder hierarchy for the user"
+    },
+    "createFolder": {
+      "method": "POST",
+      "url": "/rest/folders/",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "folderName": "Tax Documents",
+        "folderPath": "business/tax-documents",
+        "parentId": "{parent_folder_id}",
+        "description": "Tax related documents",
+        "metadata": {
+          "category": "business",
+          "priority": "high"
+        }
+      },
+      "description": "Create a new folder"
+    },
+    "getFolderUploadUrl": {
+      "method": "GET",
+      "url": "/rest/folders/{folder_id}/upload-url?fileName=document.pdf",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get presigned URL for file upload to a specific folder"
+    }
+  },
+  "expectedFolders": {
+    "description": "Based on the sample submission above, these folders would be created:",
+    "folders": [
+      {
+        "name": "Important Documents",
+        "path": "important-documents",
+        "s3Path": "{userId}/important"
+      },
+      {
+        "name": "Family Documents",
+        "path": "family-documents",
+        "s3Path": "{userId}/family"
+      },
+      {
+        "name": "Kids",
+        "path": "kids",
+        "s3Path": "{userId}/kids",
+        "children": [
+          {
+            "name": "Health",
+            "path": "kids/health",
+            "s3Path": "{userId}/kids/health"
+          },
+          {
+            "name": "School",
+            "path": "kids/school",
+            "s3Path": "{userId}/kids/school"
+          },
+          {
+            "name": "IDs",
+            "path": "kids/ids",
+            "s3Path": "{userId}/kids/ids"
+          }
+        ]
+      },
+      {
+        "name": "Pets",
+        "path": "pets",
+        "s3Path": "{userId}/pets",
+        "children": [
+          {
+            "name": "Vaccination",
+            "path": "pets/vaccination",
+            "s3Path": "{userId}/pets/vaccination"
+          },
+          {
+            "name": "Vet",
+            "path": "pets/vet",
+            "s3Path": "{userId}/pets/vet"
+          },
+          {
+            "name": "Insurance",
+            "path": "pets/insurance",
+            "s3Path": "{userId}/pets/insurance"
+          }
+        ]
+      },
+      {
+        "name": "Business",
+        "path": "business",
+        "s3Path": "{userId}/business",
+        "children": [
+          {
+            "name": "ABN / Invoicing",
+            "path": "business/abn-invoicing",
+            "s3Path": "{userId}/business/abn"
+          },
+          {
+            "name": "Business Expenses",
+            "path": "business/expenses",
+            "s3Path": "{userId}/business/expenses"
+          },
+          {
+            "name": "Tax Documents",
+            "path": "business/tax",
+            "s3Path": "{userId}/business/tax"
+          }
+        ]
+      },
+      {
+        "name": "Investments",
+        "path": "investments",
+        "s3Path": "{userId}/investments",
+        "children": [
+          {
+            "name": "Shares & ETFs",
+            "path": "investments/shares",
+            "s3Path": "{userId}/investments/shares"
+          },
+          {
+            "name": "Cryptocurrency",
+            "path": "investments/crypto",
+            "s3Path": "{userId}/investments/crypto"
+          }
+        ]
+      }
+    ]
+  },
+  "notes": {
+    "authentication": "All endpoints require Firebase authentication token",
+    "folderCreation": "Folders are automatically created based on onboarding responses",
+    "s3Integration": "Each folder gets an S3 path for file storage",
+    "hierarchy": "Parent-child relationships are maintained in the database",
+    "updates": "Users can update their onboarding responses, which recreates the folder structure"
+  }
+}

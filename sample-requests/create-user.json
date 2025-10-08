@@ -1,0 +1,9 @@
+{
+  "fullName": "John Doe",
+  "email": "john.doe@example.com",
+  "country": "United States",
+  "avatar": "https://example.com/avatar.jpg",
+  "pin": "1234",
+  "emailNotification": true,
+  "billNotification": false
+}

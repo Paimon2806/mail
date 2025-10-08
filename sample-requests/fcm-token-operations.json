@@ -1,0 +1,47 @@
+{
+  "description": "FCM Token Management Operations",
+  "operations": [
+    {
+      "name": "Add FCM Token",
+      "method": "POST",
+      "endpoint": "/user/fcm-token",
+      "description": "Add FCM token for the current user. Supports multiple devices. If token exists for another user, it will be moved to current user.",
+      "headers": {
+        "Authorization": "Bearer <firebase-token>",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "fcmToken": "dGVzdF9mY21fdG9rZW5fZXhhbXBsZV9mb3JfZGV2ZWxvcG1lbnQ"
+      }
+    },
+    {
+      "name": "Get User FCM Tokens",
+      "method": "GET",
+      "endpoint": "/user/fcm-tokens",
+      "description": "Get all FCM tokens for the current user",
+      "headers": {
+        "Authorization": "Bearer <firebase-token>"
+      }
+    },
+    {
+      "name": "Delete FCM Token",
+      "method": "DELETE",
+      "endpoint": "/user/fcm-token",
+      "description": "Delete a specific FCM token",
+      "headers": {
+        "Authorization": "Bearer <firebase-token>",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "fcmToken": "dGVzdF9mY21fdG9rZW5fZXhhbXBsZV9mb3JfZGV2ZWxvcG1lbnQ"
+      }
+    }
+  ],
+  "features": [
+    "Multiple devices per user support",
+    "Automatic token migration when user changes",
+    "Token history tracking with timestamps",
+    "Cascade delete when user is deleted",
+    "Unique token constraint across all users"
+  ]
+}

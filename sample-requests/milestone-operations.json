@@ -1,0 +1,276 @@
+{
+  "milestone_operations": {
+    "description": "Sample requests for milestone operations API",
+    "base_url": "http://localhost:8080/rest/milestones",
+    "auth_header": "Authorization: Bearer {firebase_token}",
+
+    "create_milestone": {
+      "method": "POST",
+      "url": "/rest/milestones",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "body": {
+        "title": "My Wedding Day",
+        "description": "The most beautiful day of my life",
+        "category": "Got married",
+        "milestoneDate": "2024-06-15",
+        "location": "Paris, France",
+        "tags": ["Wedding", "Anniversary", "Travel"],
+        "occasion": "Wedding Ceremony",
+        "notes": "Everything was perfect, from the ceremony to the reception. The weather was amazing and all our loved ones were there.",
+        "isPrivate": false,
+        "metadata": {
+          "weather": "sunny",
+          "guests": 150,
+          "venue": "Château de Versailles"
+        }
+      }
+    },
+
+    "create_milestone_minimal": {
+      "method": "POST",
+      "url": "/rest/milestones",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "body": {
+        "title": "First Travel",
+        "category": "First Travel",
+        "milestoneDate": "2024-03-20"
+      }
+    },
+
+    "get_all_milestones": {
+      "method": "GET",
+      "url": "/rest/milestones",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "get_milestones_with_filters": {
+      "method": "GET",
+      "url": "/rest/milestones?category=Got married&tags=Wedding&limit=10&offset=0&sortBy=milestoneDate&sortOrder=DESC",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "get_milestone_by_id": {
+      "method": "GET",
+      "url": "/rest/milestones/{milestone_id}",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "update_milestone": {
+      "method": "PUT",
+      "url": "/rest/milestones/{milestone_id}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "body": {
+        "title": "My Amazing Wedding Day",
+        "description": "The most beautiful and perfect day of my life",
+        "location": "Château de Versailles, France",
+        "notes": "Updated: Everything was absolutely perfect! The ceremony was magical and the reception was unforgettable."
+      }
+    },
+
+    "delete_milestone": {
+      "method": "DELETE",
+      "url": "/rest/milestones/{milestone_id}",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "get_milestone_stats": {
+      "method": "GET",
+      "url": "/rest/milestones/stats/overview",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "get_categories": {
+      "method": "GET",
+      "url": "/rest/milestones/categories/list",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "get_tags": {
+      "method": "GET",
+      "url": "/rest/milestones/tags/list",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "get_upcoming_milestones": {
+      "method": "GET",
+      "url": "/rest/milestones/search/upcoming?days=30",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "get_recent_milestones": {
+      "method": "GET",
+      "url": "/rest/milestones/search/recent?days=30",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    },
+
+    "search_milestones": {
+      "method": "GET",
+      "url": "/rest/milestones/search/query?q=wedding&limit=20",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      }
+    }
+  },
+
+  "sample_milestones": [
+    {
+      "title": "Got Engaged",
+      "description": "The moment he proposed under the Eiffel Tower",
+      "category": "Engaged",
+      "milestoneDate": "2023-12-25",
+      "location": "Paris, France",
+      "tags": ["Engagement", "Travel", "Christmas"],
+      "occasion": "Christmas Proposal",
+      "notes": "He surprised me with a proposal during our Christmas trip to Paris. It was magical!",
+      "isPrivate": false
+    },
+    {
+      "title": "First Date",
+      "description": "Our very first date at the local coffee shop",
+      "category": "First Date",
+      "milestoneDate": "2023-01-15",
+      "location": "Downtown Coffee Shop",
+      "tags": ["First Date", "Coffee", "Romance"],
+      "occasion": "Coffee Date",
+      "notes": "We talked for hours and I knew he was special from the first moment.",
+      "isPrivate": true
+    },
+    {
+      "title": "Graduation Day",
+      "description": "Finally graduated with my Master's degree",
+      "category": "Graduation",
+      "milestoneDate": "2023-05-20",
+      "location": "University Campus",
+      "tags": ["Education", "Achievement", "Family"],
+      "occasion": "Master's Graduation",
+      "notes": "All the hard work paid off. My family was so proud!",
+      "isPrivate": false
+    },
+    {
+      "title": "First Kiss",
+      "description": "Our first kiss after the movie",
+      "category": "First Kiss",
+      "milestoneDate": "2023-02-14",
+      "location": "Movie Theater",
+      "tags": ["First Kiss", "Valentine's Day", "Romance"],
+      "occasion": "Valentine's Day Movie",
+      "notes": "It was perfect timing after watching a romantic movie together.",
+      "isPrivate": true
+    },
+    {
+      "title": "Baby Shower",
+      "description": "Celebrating the upcoming arrival of our little one",
+      "category": "Baby Shower",
+      "milestoneDate": "2024-08-10",
+      "location": "Community Center",
+      "tags": ["Baby", "Family", "Celebration"],
+      "occasion": "Baby Shower Party",
+      "notes": "So many friends and family came to celebrate with us. We felt so loved!",
+      "isPrivate": false
+    },
+    {
+      "title": "Birthday Celebration",
+      "description": "My 30th birthday party",
+      "category": "Birthday",
+      "milestoneDate": "2024-03-15",
+      "location": "Home",
+      "tags": ["Birthday", "Milestone", "Party"],
+      "occasion": "30th Birthday",
+      "notes": "Entering a new decade with all my favorite people around me.",
+      "isPrivate": false
+    },
+    {
+      "title": "Anniversary",
+      "description": "Our first wedding anniversary",
+      "category": "Anniversary",
+      "milestoneDate": "2025-06-15",
+      "location": "Same venue as wedding",
+      "tags": ["Anniversary", "Wedding", "Celebration"],
+      "occasion": "1st Wedding Anniversary",
+      "notes": "Returning to where it all began. Can't believe it's been a year already!",
+      "isPrivate": false
+    },
+    {
+      "title": "New Home",
+      "description": "Bought our first house together",
+      "category": "New Home",
+      "milestoneDate": "2024-09-01",
+      "location": "Suburbia",
+      "tags": ["Home", "Investment", "Family"],
+      "occasion": "House Purchase",
+      "notes": "Finally found the perfect place to start our family. So excited for this new chapter!",
+      "isPrivate": false
+    }
+  ],
+
+  "common_categories": [
+    "Engaged",
+    "Got married",
+    "First Travel",
+    "First Date",
+    "First Kiss",
+    "Baby Shower",
+    "Birthday",
+    "Anniversary",
+    "Graduation",
+    "New Home",
+    "First Job",
+    "Retirement",
+    "Moving",
+    "Vacation",
+    "Holiday",
+    "Achievement",
+    "Milestone",
+    "Celebration"
+  ],
+
+  "common_tags": [
+    "Wedding",
+    "Anniversary",
+    "Travel",
+    "Family",
+    "Romance",
+    "Achievement",
+    "Celebration",
+    "Milestone",
+    "First Time",
+    "Special",
+    "Memorable",
+    "Important",
+    "Happy",
+    "Love",
+    "Friends",
+    "Party",
+    "Holiday",
+    "Vacation",
+    "Education",
+    "Career"
+  ]
+}
