@@ -1,0 +1,12 @@
+{
+  "description": "POST /user/fcm-token - Add FCM token for multiple devices support",
+  "method": "POST",
+  "endpoint": "/user/fcm-token",
+  "headers": {
+    "Authorization": "Bearer <firebase-token>",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "fcmToken": "dGVzdF9mY21fdG9rZW5fZXhhbXBsZV9mb3JfZGV2ZWxvcG1lbnQ"
+  }
+}

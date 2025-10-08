@@ -1,0 +1,8 @@
+{
+  "description": "GET /user/fcm-tokens - Get all FCM tokens for current user",
+  "method": "GET",
+  "endpoint": "/user/fcm-tokens",
+  "headers": {
+    "Authorization": "Bearer <firebase-token>"
+  }
+}

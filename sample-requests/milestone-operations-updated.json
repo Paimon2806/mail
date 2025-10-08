@@ -1,0 +1,298 @@
+{
+  "createMilestone": {
+    "method": "POST",
+    "url": "/milestones/",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "title": "My Wedding Day",
+      "description": "The most beautiful day of my life",
+      "milestoneCategoryId": "category-uuid-here",
+      "milestoneDate": "2024-06-15",
+      "location": "Paris, France",
+      "tags": ["Wedding", "Anniversary", "Travel"],
+      "occasion": "Wedding Ceremony",
+      "notes": "Everything was perfect, from the ceremony to the reception",
+      "isPrivate": false,
+      "metadata": {
+        "weather": "sunny",
+        "guests": 150
+      }
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Milestone created successfully",
+      "data": {
+        "id": "milestone-uuid-here",
+        "title": "My Wedding Day",
+        "description": "The most beautiful day of my life",
+        "milestoneCategoryId": "category-uuid-here",
+        "milestoneCategory": {
+          "id": "category-uuid-here",
+          "name": "Relationship Moments",
+          "icon": "❤️",
+          "color": "#FF6B6B"
+        },
+        "milestoneDate": "2024-06-15",
+        "location": "Paris, France",
+        "tags": ["Wedding", "Anniversary", "Travel"],
+        "metadata": {
+          "weather": "sunny",
+          "guests": 150
+        },
+        "isActive": true,
+        "isPrivate": false,
+        "occasion": "Wedding Ceremony",
+        "notes": "Everything was perfect, from the ceremony to the reception",
+        "files": [],
+        "createdAt": "2024-01-01T10:00:00Z",
+        "updatedAt": "2024-01-01T10:00:00Z"
+      }
+    }
+  },
+  "getMilestones": {
+    "method": "GET",
+    "url": "/milestones/?milestoneCategoryId=category-uuid-here&limit=10&offset=0&sortBy=milestoneDate&sortOrder=DESC",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Milestones retrieved successfully",
+      "data": {
+        "milestones": [
+          {
+            "id": "milestone-uuid-1",
+            "title": "My Wedding Day",
+            "description": "The most beautiful day of my life",
+            "milestoneCategoryId": "category-uuid-here",
+            "milestoneCategory": {
+              "id": "category-uuid-here",
+              "name": "Relationship Moments",
+              "icon": "❤️",
+              "color": "#FF6B6B"
+            },
+            "milestoneDate": "2024-06-15",
+            "location": "Paris, France",
+            "tags": ["Wedding", "Anniversary", "Travel"],
+            "metadata": {
+              "weather": "sunny",
+              "guests": 150
+            },
+            "isActive": true,
+            "isPrivate": false,
+            "occasion": "Wedding Ceremony",
+            "notes": "Everything was perfect, from the ceremony to the reception",
+            "files": [],
+            "createdAt": "2024-01-01T10:00:00Z",
+            "updatedAt": "2024-01-01T10:00:00Z"
+          }
+        ],
+        "total": 1,
+        "hasMore": false
+      }
+    }
+  },
+  "getMilestoneById": {
+    "method": "GET",
+    "url": "/milestones/milestone-uuid-here",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Milestone retrieved successfully",
+      "data": {
+        "id": "milestone-uuid-here",
+        "title": "My Wedding Day",
+        "description": "The most beautiful day of my life",
+        "milestoneCategoryId": "category-uuid-here",
+        "milestoneCategory": {
+          "id": "category-uuid-here",
+          "name": "Relationship Moments",
+          "icon": "❤️",
+          "color": "#FF6B6B"
+        },
+        "milestoneDate": "2024-06-15",
+        "location": "Paris, France",
+        "tags": ["Wedding", "Anniversary", "Travel"],
+        "metadata": {
+          "weather": "sunny",
+          "guests": 150
+        },
+        "isActive": true,
+        "isPrivate": false,
+        "occasion": "Wedding Ceremony",
+        "notes": "Everything was perfect, from the ceremony to the reception",
+        "files": [],
+        "createdAt": "2024-01-01T10:00:00Z",
+        "updatedAt": "2024-01-01T10:00:00Z"
+      }
+    }
+  },
+  "updateMilestone": {
+    "method": "PUT",
+    "url": "/milestones/milestone-uuid-here",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "title": "Our Wedding Day",
+      "description": "The most beautiful day of our lives",
+      "milestoneCategoryId": "category-uuid-here",
+      "location": "Paris, France",
+      "tags": ["Wedding", "Anniversary", "Travel", "Love"],
+      "notes": "Updated notes about our special day"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Milestone updated successfully",
+      "data": {
+        "id": "milestone-uuid-here",
+        "title": "Our Wedding Day",
+        "description": "The most beautiful day of our lives",
+        "milestoneCategoryId": "category-uuid-here",
+        "milestoneCategory": {
+          "id": "category-uuid-here",
+          "name": "Relationship Moments",
+          "icon": "❤️",
+          "color": "#FF6B6B"
+        },
+        "milestoneDate": "2024-06-15",
+        "location": "Paris, France",
+        "tags": ["Wedding", "Anniversary", "Travel", "Love"],
+        "metadata": {
+          "weather": "sunny",
+          "guests": 150
+        },
+        "isActive": true,
+        "isPrivate": false,
+        "occasion": "Wedding Ceremony",
+        "notes": "Updated notes about our special day",
+        "files": [],
+        "createdAt": "2024-01-01T10:00:00Z",
+        "updatedAt": "2024-01-01T11:00:00Z"
+      }
+    }
+  },
+  "deleteMilestone": {
+    "method": "DELETE",
+    "url": "/milestones/milestone-uuid-here",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Milestone deleted successfully",
+      "data": {
+        "success": true,
+        "message": "Milestone deleted successfully"
+      }
+    }
+  },
+  "getAvailableCategories": {
+    "method": "GET",
+    "url": "/milestones/categories/available",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Available categories retrieved successfully",
+      "data": [
+        {
+          "id": "category-uuid-1",
+          "name": "Relationship Moments",
+          "icon": "❤️",
+          "color": "#FF6B6B",
+          "description": "Special moments with loved ones and relationships",
+          "isPublic": true,
+          "isActive": true
+        },
+        {
+          "id": "category-uuid-2",
+          "name": "Family Life",
+          "icon": "👨‍👩‍👧",
+          "color": "#4ECDC4",
+          "description": "Family milestones and precious family moments",
+          "isPublic": true,
+          "isActive": true
+        },
+        {
+          "id": "category-uuid-3",
+          "name": "My Personal Category",
+          "icon": "⭐",
+          "color": "#FFA500",
+          "description": "My custom personal category",
+          "isPublic": false,
+          "isActive": true
+        }
+      ]
+    }
+  },
+  "getMilestoneStats": {
+    "method": "GET",
+    "url": "/milestones/stats/overview",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Milestone statistics retrieved successfully",
+      "data": {
+        "totalMilestones": 25,
+        "milestonesByCategory": {
+          "Relationship Moments": 5,
+          "Family Life": 8,
+          "Travel & Adventures": 3,
+          "Everyday Wins": 9
+        },
+        "milestonesByYear": {
+          "2024": 15,
+          "2023": 8,
+          "2022": 2
+        },
+        "recentMilestones": [],
+        "upcomingMilestones": []
+      }
+    }
+  },
+  "searchMilestones": {
+    "method": "GET",
+    "url": "/milestones/search/query?q=wedding&limit=10",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Search results retrieved successfully",
+      "data": [
+        {
+          "id": "milestone-uuid-1",
+          "title": "My Wedding Day",
+          "description": "The most beautiful day of my life",
+          "milestoneCategoryId": "category-uuid-here",
+          "milestoneCategory": {
+            "id": "category-uuid-here",
+            "name": "Relationship Moments",
+            "icon": "❤️",
+            "color": "#FF6B6B"
+          },
+          "milestoneDate": "2024-06-15",
+          "location": "Paris, France",
+          "tags": ["Wedding", "Anniversary", "Travel"],
+          "isActive": true,
+          "isPrivate": false,
+          "occasion": "Wedding Ceremony",
+          "notes": "Everything was perfect, from the ceremony to the reception",
+          "files": [],
+          "createdAt": "2024-01-01T10:00:00Z",
+          "updatedAt": "2024-01-01T10:00:00Z"
+        }
+      ]
+    }
+  }
+}

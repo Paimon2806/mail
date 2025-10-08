@@ -1,0 +1,9 @@
+{
+  "fullName": "John Doe Updated",
+  "email": "john.updated@example.com",
+  "country": "Canada",
+  "avatar": "https://example.com/new-avatar.jpg",
+  "pin": "5678",
+  "emailNotification": false,
+  "billNotification": true
+}

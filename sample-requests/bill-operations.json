@@ -1,0 +1,310 @@
+  "createBill": {
+    "method": "POST",
+    "endpoint": "/bills/",
+    "description": "Create a new bill with the provided data",
+    "headers": {
+      "Authorization": "Bearer YOUR_FIREBASE_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "billName": "Electricity Bill",
+      "amount": 125.50,
+      "currency": "USD",
+      "paymentCycle": "monthly",
+      "paymentDate": "2024-02-15",
+      "description": "Monthly electricity bill for apartment",
+      "category": "Utilities",
+      "vendor": "Electric Company",
+      "accountNumber": "1234567890",
+      "referenceNumber": "ELC-2024-001",
+      "reminderDate": "2024-02-10",
+      "folderId": "folder-uuid-here",
+      "scannedData": {
+        "source": "camera",
+        "confidence": 0.92
+      },
+      "metadata": {
+        "source": "mobile_app",
+        "version": "1.0"
+      }
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Bill created successfully",
+      "data": {
+        "id": "bill-uuid-here",
+        "billName": "Electricity Bill",
+        "amount": 125.50,
+        "currency": "USD",
+        "paymentCycle": "monthly",
+        "paymentDate": "2024-02-15",
+        "description": "Monthly electricity bill for apartment",
+        "category": "Utilities",
+        "vendor": "Electric Company",
+        "accountNumber": "1234567890",
+        "referenceNumber": "ELC-2024-001",
+        "isActive": true,
+        "isPaid": false,
+        "reminderDate": "2024-02-10",
+        "folderId": "folder-uuid-here",
+        "folderName": "Personal",
+        "scannedData": {
+          "source": "camera",
+          "confidence": 0.92
+        },
+        "metadata": {
+          "source": "mobile_app",
+          "version": "1.0"
+        },
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z"
+      }
+    }
+  },
+  "getBills": {
+    "method": "GET",
+    "endpoint": "/bills/",
+    "description": "Get user's bills with optional filters",
+    "headers": {
+      "Authorization": "Bearer YOUR_FIREBASE_TOKEN"
+    },
+    "queryParams": {
+      "search": "electricity",
+      "isActive": "true",
+      "isPaid": "false",
+      "category": "Utilities",
+      "paymentCycle": "monthly",
+      "folderId": "folder-uuid-here",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Bills retrieved successfully",
+      "data": [
+        {
+          "id": "bill-uuid-here",
+          "billName": "Electricity Bill",
+          "amount": 125.50,
+          "currency": "USD",
+          "paymentCycle": "monthly",
+          "paymentDate": "2024-02-15",
+          "description": "Monthly electricity bill for apartment",
+          "category": "Utilities",
+          "vendor": "Electric Company",
+          "accountNumber": "1234567890",
+          "referenceNumber": "ELC-2024-001",
+          "isActive": true,
+          "isPaid": false,
+          "reminderDate": "2024-02-10",
+          "folderId": "folder-uuid-here",
+          "folderName": "Personal",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "updatedAt": "2024-01-01T00:00:00Z"
+        }
+      ]
+    }
+  },
+  "getBillById": {
+    "method": "GET",
+    "endpoint": "/bills/{id}",
+    "description": "Retrieve a specific bill by its ID",
+    "headers": {
+      "Authorization": "Bearer YOUR_FIREBASE_TOKEN"
+    },
+    "pathParams": {
+      "id": "bill-uuid-here"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Bill retrieved successfully",
+      "data": {
+        "id": "bill-uuid-here",
+        "billName": "Electricity Bill",
+        "amount": 125.50,
+        "currency": "USD",
+        "paymentCycle": "monthly",
+        "paymentDate": "2024-02-15",
+        "description": "Monthly electricity bill for apartment",
+        "category": "Utilities",
+        "vendor": "Electric Company",
+        "accountNumber": "1234567890",
+        "referenceNumber": "ELC-2024-001",
+        "isActive": true,
+        "isPaid": false,
+        "reminderDate": "2024-02-10",
+        "folderId": "folder-uuid-here",
+        "folderName": "Personal",
+        "scannedData": {
+          "source": "camera",
+          "confidence": 0.92
+        },
+        "metadata": {
+          "source": "mobile_app",
+          "version": "1.0"
+        },
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z"
+      }
+    }
+  },
+  "updateBill": {
+    "method": "PUT",
+    "endpoint": "/bills/{id}",
+    "description": "Update an existing bill",
+    "headers": {
+      "Authorization": "Bearer YOUR_FIREBASE_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "pathParams": {
+      "id": "bill-uuid-here"
+    },
+    "body": {
+      "billName": "Updated Electricity Bill",
+      "amount": 135.75,
+      "description": "Updated monthly electricity bill",
+      "category": "Utilities",
+      "vendor": "Electric Company",
+      "reminderDate": "2024-02-12"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Bill updated successfully",
+      "data": {
+        "id": "bill-uuid-here",
+        "billName": "Updated Electricity Bill",
+        "amount": 135.75,
+        "currency": "USD",
+        "paymentCycle": "monthly",
+        "paymentDate": "2024-02-15",
+        "description": "Updated monthly electricity bill",
+        "category": "Utilities",
+        "vendor": "Electric Company",
+        "accountNumber": "1234567890",
+        "referenceNumber": "ELC-2024-001",
+        "isActive": true,
+        "isPaid": false,
+        "reminderDate": "2024-02-12",
+        "folderId": "folder-uuid-here",
+        "folderName": "Personal",
+        "createdAt": "2024-01-01T00:00:00Z",
+        "updatedAt": "2024-01-01T00:00:00Z"
+      }
+    }
+  },
+  "deleteBill": {
+    "method": "DELETE",
+    "endpoint": "/bills/{id}",
+    "description": "Delete a bill permanently",
+    "headers": {
+      "Authorization": "Bearer YOUR_FIREBASE_TOKEN"
+    },
+    "pathParams": {
+      "id": "bill-uuid-here"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Bill deleted successfully",
+      "data": {
+        "success": true,
+        "message": "Bill deleted successfully"
+      }
+    }
+  },
+  "getFoldersWithBills": {
+    "method": "GET",
+    "endpoint": "/folders/",
+    "description": "Get all folders with bills included",
+    "headers": {
+      "Authorization": "Bearer YOUR_FIREBASE_TOKEN"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Folders retrieved successfully",
+      "data": [
+        {
+          "id": "folder-uuid-here",
+          "folderName": "Personal",
+          "folderIcon": "📁",
+          "folderPath": "/personal",
+          "parentId": null,
+          "userId": "user-uuid-here",
+          "s3Path": "user-uuid-here/personal",
+          "isActive": true,
+          "description": "Personal documents and bills",
+          "metadata": {
+            "createdFromFrontend": true
+          },
+          "createdAt": "2024-01-01T00:00:00Z",
+          "updatedAt": "2024-01-01T00:00:00Z",
+          "bills": [
+            {
+              "id": "bill-uuid-here",
+              "billName": "Electricity Bill",
+              "amount": 125.50,
+              "currency": "USD",
+              "paymentCycle": "monthly",
+              "paymentDate": "2024-02-15",
+              "category": "Utilities",
+              "vendor": "Electric Company",
+              "isActive": true,
+              "isPaid": false,
+              "folderId": "folder-uuid-here",
+              "createdAt": "2024-01-01T00:00:00Z",
+              "updatedAt": "2024-01-01T00:00:00Z"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "getFolderDetailsWithBills": {
+    "method": "GET",
+    "endpoint": "/folders/{folderId}",
+    "description": "Get folder details with subfolders, files, and bills",
+    "headers": {
+      "Authorization": "Bearer YOUR_FIREBASE_TOKEN"
+    },
+    "pathParams": {
+      "folderId": "folder-uuid-here"
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Folder details retrieved successfully",
+      "data": {
+        "folder": {
+          "id": "folder-uuid-here",
+          "folderName": "Personal",
+          "folderIcon": "📁",
+          "folderPath": "/personal",
+          "parentId": null,
+          "userId": "user-uuid-here",
+          "s3Path": "user-uuid-here/personal",
+          "isActive": true,
+          "description": "Personal documents and bills",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "updatedAt": "2024-01-01T00:00:00Z"
+        },
+        "subfolders": [],
+        "files": [],
+        "bills": [
+          {
+            "id": "bill-uuid-here",
+            "billName": "Electricity Bill",
+            "amount": 125.50,
+            "currency": "USD",
+            "paymentCycle": "monthly",
+            "paymentDate": "2024-02-15",
+            "category": "Utilities",
+            "vendor": "Electric Company",
+            "isActive": true,
+            "isPaid": false,
+            "folderId": "folder-uuid-here",
+            "createdAt": "2024-01-01T00:00:00Z",
+            "updatedAt": "2024-01-01T00:00:00Z"
+          }
+        ]
+      }
+    }
+  }
+}

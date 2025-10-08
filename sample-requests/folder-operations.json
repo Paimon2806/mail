@@ -1,0 +1,371 @@
+{
+  "name": "Comprehensive Folder Operations",
+  "description": "Sample requests for all folder management endpoints",
+  "baseUrl": "/rest/folders",
+  "authentication": "All endpoints require Firebase authentication token",
+
+  "basicOperations": {
+    "createFolder": {
+      "method": "POST",
+      "url": "/rest/folders/",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "folderName": "Tax Documents 2024",
+        "folderPath": "business/tax-2024",
+        "parentId": "{parent_folder_id}",
+        "description": "Tax documents for 2024 financial year",
+        "metadata": {
+          "category": "business",
+          "year": "2024",
+          "priority": "high",
+          "tags": ["tax", "business", "2024"]
+        }
+      },
+      "description": "Create a new folder with metadata"
+    },
+
+    "updateFolder": {
+      "method": "PUT",
+      "url": "/rest/folders/{folder_id}",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "folderName": "Tax Documents 2024 - Updated",
+        "description": "Updated tax documents folder",
+        "metadata": {
+          "category": "business",
+          "year": "2024",
+          "priority": "critical",
+          "tags": ["tax", "business", "2024", "updated"],
+          "lastModified": "2024-01-15"
+        }
+      },
+      "description": "Update folder details and metadata"
+    },
+
+    "deleteFolder": {
+      "method": "DELETE",
+      "url": "/rest/folders/{folder_id}",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Soft delete a folder (marks as inactive)"
+    }
+  },
+
+  "hierarchyOperations": {
+    "createHierarchy": {
+      "method": "POST",
+      "url": "/rest/folders/hierarchy",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "folders": [
+          {
+            "folderName": "Business Documents",
+            "folderPath": "business",
+            "tempId": "business-root",
+            "description": "All business related documents",
+            "metadata": {
+              "category": "business",
+              "type": "root"
+            }
+          },
+          {
+            "folderName": "Financial Records",
+            "folderPath": "business/financial",
+            "tempId": "financial",
+            "parentTempId": "business-root",
+            "description": "Financial documents and records",
+            "metadata": {
+              "category": "business",
+              "type": "financial"
+            }
+          },
+          {
+            "folderName": "Tax Documents",
+            "folderPath": "business/financial/tax",
+            "tempId": "tax",
+            "parentTempId": "financial",
+            "description": "Tax related documents",
+            "metadata": {
+              "category": "business",
+              "type": "tax"
+            }
+          },
+          {
+            "folderName": "Invoices",
+            "folderPath": "business/financial/invoices",
+            "tempId": "invoices",
+            "parentTempId": "financial",
+            "description": "Customer invoices",
+            "metadata": {
+              "category": "business",
+              "type": "invoices"
+            }
+          }
+        ]
+      },
+      "description": "Create a complete folder hierarchy in one request"
+    },
+
+    "getFolderHierarchy": {
+      "method": "GET",
+      "url": "/rest/folders/hierarchy",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get complete folder hierarchy with parent-child relationships"
+    },
+
+    "getRootFolders": {
+      "method": "GET",
+      "url": "/rest/folders/root",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get only root level folders"
+    },
+
+    "getSubfolders": {
+      "method": "GET",
+      "url": "/rest/folders/{parent_folder_id}/subfolders",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get subfolders of a specific parent folder"
+    }
+  },
+
+  "advancedOperations": {
+    "moveFolder": {
+      "method": "PUT",
+      "url": "/rest/folders/{folder_id}/move",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "newParentId": "{new_parent_folder_id}",
+        "newFolderPath": "new-location/moved-folder"
+      },
+      "description": "Move folder to a new parent or location"
+    },
+
+    "copyFolder": {
+      "method": "POST",
+      "url": "/rest/folders/{folder_id}/copy",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "targetParentId": "{target_parent_id}",
+        "newFolderName": "Copied Tax Documents",
+        "copySubfolders": true
+      },
+      "description": "Copy folder to a new location with option to copy subfolders"
+    },
+
+    "bulkOperations": {
+      "method": "POST",
+      "url": "/rest/folders/bulk",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "folderIds": ["{folder_id_1}", "{folder_id_2}", "{folder_id_3}"],
+        "operation": "move",
+        "targetParentId": "{target_parent_id}"
+      },
+      "description": "Perform bulk operations on multiple folders",
+      "supportedOperations": ["delete", "move", "copy", "activate", "deactivate"]
+    }
+  },
+
+  "searchAndQuery": {
+    "basicSearch": {
+      "method": "GET",
+      "url": "/rest/folders/search?q=tax",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Basic folder search by name or description"
+    },
+
+    "advancedSearch": {
+      "method": "POST",
+      "url": "/rest/folders/search",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "query": "business documents",
+        "includeInactive": false,
+        "parentId": "{specific_parent_id}"
+      },
+      "description": "Advanced search with additional filters"
+    },
+
+    "getFolderStats": {
+      "method": "GET",
+      "url": "/rest/folders/stats",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get folder statistics and usage information",
+      "expectedResponse": {
+        "totalFolders": 25,
+        "rootFolders": 5,
+        "maxDepth": 4,
+        "foldersByType": {
+          "business": 8,
+          "personal": 12,
+          "general": 5
+        },
+        "storageStats": {
+          "totalFiles": 150,
+          "totalSize": 1048576000,
+          "avgFilesPerFolder": 6
+        }
+      }
+    }
+  },
+
+  "fileOperations": {
+    "getUploadUrl": {
+      "method": "POST",
+      "url": "/rest/folders/{folder_id}/upload-url",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "fileName": "tax-document-2024.pdf",
+        "contentType": "application/pdf",
+        "fileSize": 2048576
+      },
+      "description": "Get presigned URL for file upload to specific folder",
+      "expectedResponse": {
+        "uploadUrl": "https://s3.amazonaws.com/bucket/presigned-url",
+        "key": "user123/business/tax/tax-document-2024.pdf",
+        "downloadUrl": "https://s3.amazonaws.com/bucket/download-url",
+        "formFields": {},
+        "expiresAt": "2024-01-15T10:30:00.000Z"
+      }
+    },
+
+    "getFolderFiles": {
+      "method": "GET",
+      "url": "/rest/folders/{folder_id}/files?page=1&limit=20",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}"
+      },
+      "description": "Get paginated list of files in a folder",
+      "expectedResponse": {
+        "files": [],
+        "pagination": {
+          "page": 1,
+          "limit": 20,
+          "total": 0,
+          "totalPages": 0
+        }
+      }
+    }
+  },
+
+  "sharingOperations": {
+    "shareFolder": {
+      "method": "POST",
+      "url": "/rest/folders/{folder_id}/share",
+      "headers": {
+        "Authorization": "Bearer {firebase_token}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "shareWithEmail": "colleague@company.com",
+        "permission": "read",
+        "message": "Sharing tax documents for review"
+      },
+      "description": "Share folder with another user",
+      "permissionLevels": ["read", "write", "admin"]
+    }
+  },
+
+  "exampleWorkflow": {
+    "description": "Complete workflow example: Create business folder structure",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Create Business root folder",
+        "endpoint": "POST /rest/folders/",
+        "body": {
+          "folderName": "Business",
+          "folderPath": "business",
+          "description": "Business documents and records"
+        }
+      },
+      {
+        "step": 2,
+        "action": "Create Financial subfolder",
+        "endpoint": "POST /rest/folders/",
+        "body": {
+          "folderName": "Financial",
+          "folderPath": "business/financial",
+          "parentId": "{business_folder_id}",
+          "description": "Financial records and documents"
+        }
+      },
+      {
+        "step": 3,
+        "action": "Upload document to Financial folder",
+        "endpoint": "POST /rest/folders/{financial_folder_id}/upload-url",
+        "body": {
+          "fileName": "invoice-001.pdf",
+          "contentType": "application/pdf"
+        }
+      },
+      {
+        "step": 4,
+        "action": "Search for financial documents",
+        "endpoint": "GET /rest/folders/search?q=financial"
+      },
+      {
+        "step": 5,
+        "action": "Get folder statistics",
+        "endpoint": "GET /rest/folders/stats"
+      }
+    ]
+  },
+
+  "errorHandling": {
+    "commonErrors": {
+      "401": "Unauthorized - Invalid or missing Firebase token",
+      "403": "Forbidden - User doesn't own the folder",
+      "404": "Not Found - Folder doesn't exist",
+      "400": "Bad Request - Invalid data or circular dependency",
+      "409": "Conflict - Folder name already exists in location"
+    },
+    "circularDependencyExample": {
+      "scenario": "Trying to move a parent folder into its own child",
+      "request": "PUT /rest/folders/parent-id/move",
+      "body": {
+        "newParentId": "child-id"
+      },
+      "response": {
+        "success": false,
+        "message": "Cannot move folder: would create circular dependency",
+        "status": 400
+      }
+    }
+  }
+}

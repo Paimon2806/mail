@@ -1,0 +1,94 @@
+{
+  "classifyShippingUpdate": {
+    "description": "Classify a shipping update email",
+    "method": "POST",
+    "endpoint": "/rest/email-classification",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "emailContent": "Dear customer, your order #12345 has been shipped and will arrive soon. Track your package here: https://example.com/track/12345",
+      "candidateLabels": ["Shipping Update", "Promotional", "Spam", "Invoice"]
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Email classified successfully",
+      "data": [
+        { "label": "Shipping Update", "score": 0.99 },
+        { "label": "Promotional", "score": 0.005 },
+        { "label": "Spam", "score": 0.003 },
+        { "label": "Invoice", "score": 0.002 }
+      ]
+    }
+  },
+  "classifyPromotional": {
+    "description": "Classify a promotional email",
+    "method": "POST",
+    "endpoint": "/rest/email-classification",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "emailContent": "Big sale this weekend! Get 50% off all items. Limited time offer. Shop now at our website: https://example.com/sale",
+      "candidateLabels": ["Shipping Update", "Promotional", "Spam", "Invoice"]
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Email classified successfully",
+      "data": [
+        { "label": "Promotional", "score": 0.98 },
+        { "label": "Shipping Update", "score": 0.008 },
+        { "label": "Spam", "score": 0.007 },
+        { "label": "Invoice", "score": 0.005 }
+      ]
+    }
+  },
+  "classifySpam": {
+    "description": "Classify a spam email",
+    "method": "POST",
+    "endpoint": "/rest/email-classification",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "emailContent": "URGENT: You have won a lottery! Click here to claim your prize. Do not share this with anyone. Limited time offer. https://malicious.link",
+      "candidateLabels": ["Shipping Update", "Promotional", "Spam", "Invoice"]
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Email classified successfully",
+      "data": [
+        { "label": "Spam", "score": 0.995 },
+        { "label": "Promotional", "score": 0.002 },
+        { "label": "Shipping Update", "score": 0.002 },
+        { "label": "Invoice", "score": 0.001 }
+      ]
+    }
+  },
+  "classifyInvoice": {
+    "description": "Classify an invoice email",
+    "method": "POST",
+    "endpoint": "/rest/email-classification",
+    "headers": {
+      "Authorization": "Bearer <firebase-token>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "emailContent": "Your monthly invoice is now available. Total amount due: $150.00. View and pay your bill here: https://example.com/invoice/abc",
+      "candidateLabels": ["Shipping Update", "Promotional", "Spam", "Invoice"]
+    },
+    "expectedResponse": {
+      "success": true,
+      "message": "Email classified successfully",
+      "data": [
+        { "label": "Invoice", "score": 0.98 },
+        { "label": "Shipping Update", "score": 0.008 },
+        { "label": "Promotional", "score": 0.007 },
+        { "label": "Spam", "score": 0.005 }
+      ]
+    }
+  }
+}

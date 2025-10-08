@@ -1,0 +1,215 @@
+{
+  "info": {
+    "name": "Milestone Categories API",
+    "description": "Sample requests for milestone categories operations with pagination (public first, then private)",
+    "version": "1.0.0"
+  },
+  "requests": [
+    {
+      "name": "Get All Milestone Categories (Paginated)",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories?limit=20&offset=0",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Get all milestone categories with pagination (public first, then private)"
+    },
+    {
+      "name": "Get Public Milestone Categories",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories/public",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Get all public milestone categories"
+    },
+    {
+      "name": "Get Personal Milestone Categories",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories/personal",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Get all personal milestone categories created by the user"
+    },
+    {
+      "name": "Get Categories by Milestone Type",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories/type/{{milestoneTypeId}}",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Get milestone categories filtered by milestone type"
+    },
+    {
+      "name": "Get Milestone Category by ID",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories/{{milestoneCategoryId}}",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Get a specific milestone category by its ID"
+    },
+    {
+      "name": "Create Personal Milestone Category",
+      "method": "POST",
+      "url": "{{baseUrl}}/milestone-categories",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "name": "My Custom Wedding",
+        "description": "A personal wedding milestone category",
+        "icon": "heart",
+        "color": "#FF6B6B",
+        "isPublic": false,
+        "sortOrder": 0,
+        "milestoneTypeId": "{{relationshipMomentsTypeId}}"
+      },
+      "description": "Create a new personal milestone category"
+    },
+    {
+      "name": "Create Public Milestone Category",
+      "method": "POST",
+      "url": "{{baseUrl}}/milestone-categories",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "name": "Sports Achievement",
+        "description": "Celebrate your sports milestones",
+        "icon": "trophy",
+        "color": "#FFD700",
+        "isPublic": true,
+        "sortOrder": 11,
+        "milestoneTypeId": "{{everydayWinsTypeId}}"
+      },
+      "description": "Create a new public milestone category"
+    },
+    {
+      "name": "Update Milestone Category",
+      "method": "PUT",
+      "url": "{{baseUrl}}/milestone-categories/{{milestoneCategoryId}}",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "name": "Updated Wedding Category",
+        "description": "Updated description for wedding milestones",
+        "icon": "ring",
+        "color": "#FF69B4",
+        "sortOrder": 5
+      },
+      "description": "Update an existing milestone category"
+    },
+    {
+      "name": "Delete Milestone Category",
+      "method": "DELETE",
+      "url": "{{baseUrl}}/milestone-categories/{{milestoneCategoryId}}",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Delete a milestone category (only personal categories can be deleted)"
+    },
+    {
+      "name": "Get Milestone Category Statistics",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories/stats/overview",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Get comprehensive statistics about milestone categories"
+    },
+    {
+      "name": "Search Milestone Categories",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories/search/query?q=wedding&limit=10",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Search milestone categories by name or description"
+    },
+    {
+      "name": "Filter Categories by Public Status",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories?isPublic=true&isActive=true&limit=10",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Filter milestone categories by public status and active status"
+    },
+    {
+      "name": "Search Categories with Text and Pagination",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories?search=family&sortBy=name&sortOrder=ASC&limit=5&offset=0",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Search milestone categories with text and pagination"
+    },
+    {
+      "name": "Get Categories for Relationship Moments Type",
+      "method": "GET",
+      "url": "{{baseUrl}}/milestone-categories/type/{{relationshipMomentsTypeId}}?isPublic=true",
+      "headers": {
+        "Authorization": "Bearer {{firebaseToken}}",
+        "Content-Type": "application/json"
+      },
+      "description": "Get all public categories for Relationship Moments milestone type"
+    }
+  ],
+  "variables": {
+    "baseUrl": "http://localhost:8083/api/rest",
+    "firebaseToken": "your-firebase-token-here",
+    "milestoneCategoryId": "048c0044-50ef-4beb-8d08-18ece5ae9e67",
+    "milestoneTypeId": "c69c19f1-0103-44d6-a701-ccce29ae5b93",
+    "relationshipMomentsTypeId": "c69c19f1-0103-44d6-a701-ccce29ae5b93",
+    "everydayWinsTypeId": "03ced397-39a3-45da-b0a0-16b866339dbf"
+  },
+  "examples": {
+    "createPersonalCategory": {
+      "name": "My Travel Memories",
+      "description": "Personal collection of travel experiences",
+      "icon": "map",
+      "color": "#4ECDC4",
+      "isPublic": false,
+      "sortOrder": 0,
+      "milestoneTypeId": "1104e92a-354b-4c4d-8834-221b9253f8c5"
+    },
+    "createPublicCategory": {
+      "name": "Sports Achievements",
+      "description": "Celebrate your sports and fitness milestones",
+      "icon": "trophy",
+      "color": "#FF6B6B",
+      "isPublic": true,
+      "sortOrder": 12,
+      "milestoneTypeId": "03ced397-39a3-45da-b0a0-16b866339dbf"
+    },
+    "updateCategory": {
+      "name": "Updated Sports Achievements",
+      "description": "Updated description for sports milestones",
+      "icon": "medal",
+      "color": "#FFD700",
+      "isActive": true,
+      "sortOrder": 12
+    },
+    "paginationExample": {
+      "description": "Get first 10 public categories, then personal ones",
+      "url": "{{baseUrl}}/milestone-categories?limit=10&offset=0",
+      "expectedOrder": "Public categories first, then personal categories"
+    }
+  }
+}
