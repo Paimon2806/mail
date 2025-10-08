@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -175,3 +176,6 @@ firebase-debug.*.log
 
 # Service account files
 service-account*.json
+=======
+node_modules
+>>>>>>> 260570ba6817b5a0009c5136eb269dda322d224d

@@ -1,0 +1,16 @@
+ngrok config add-authtoken 32SLJmZN7mIcOR8m0El1guycZdd_4xWk3p1c34QXgZdymQ2pD
+ngrok http http://localhost:8080
+
+ngrok                                                                                                     (Ctrl+C to quit)                                                                                                                          �  Block threats before they reach your services with new WAF actions → https://ngrok.com/r/waf                          
+
+
+
+Receiving Domain Also known as the hostname. We parse email sent to any address within this domain. Add a subdomain like "parse" to ensure only those emails are processed.
+cabworld.co.in
+
+Destination URL The URL must be accessible from the public web.
+https://dd3b4f0bde6e.ngrok-free.app/webhooks/sendgrid
+
+Additional Options
+Check incoming emails for spam
+POST the raw, full MIME message

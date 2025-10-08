@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: "3.5"
 services:
   server:
@@ -20,3 +21,45 @@ services:
       MYSQL_USER: test
       MYSQL_PASSWORD: test
       MYSQL_DATABASE: test
+=======
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: email_classifier
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:7.0
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build: ./backend
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: mysql://user:password@mysql:3306/email_classifier
+      HUGGING_FACE_API_TOKEN: ${HUGGING_FACE_API_TOKEN}
+      SENDGRID_WEBHOOK_SECRET: ${SENDGRID_WEBHOOK_SECRET}
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./backend:/app
+
+volumes:
+  mysql_data:
+  redis_data:
+>>>>>>> 260570ba6817b5a0009c5136eb269dda322d224d

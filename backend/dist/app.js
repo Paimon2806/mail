@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = void 0;
+const express_1 = __importDefault(require("express"));
+const sendgridRoutes_1 = require("./api/sendgridRoutes");
+const categoryRoutes_1 = require("./api/categoryRoutes");
+const emailRoutes_1 = require("./api/emailRoutes");
+const errorHandler_1 = require("./middleware/errorHandler");
+const logger_1 = require("./middleware/logger");
+const app = (0, express_1.default)();
+exports.app = app;
+app.use(express_1.default.json());
+app.use(logger_1.logger);
+app.use('/webhooks', sendgridRoutes_1.sendgridRoutes);
+app.use('/categories', categoryRoutes_1.categoryRoutes);
+app.use('/emails', emailRoutes_1.emailRoutes);
+app.use(errorHandler_1.errorHandler);
