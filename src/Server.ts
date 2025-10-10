@@ -6,6 +6,7 @@ import "@tsed/ajv";
 import "@tsed/swagger";
 import { config } from "./config/index";
 import * as rest from "./controllers/rest/index";
+import { AnalyserController } from "./controllers/rest/analyser.controller";
 import * as pages from "./controllers/pages/index";
 import { ErrorHandlerMiddleware } from "./middlewares/error-handler.middleware";
 
@@ -19,7 +20,7 @@ import { ErrorHandlerMiddleware } from "./middlewares/error-handler.middleware";
     returnsCoercedValues: true
   },
   mount: {
-    "/rest": [...Object.values(rest)],
+    "/rest": [...Object.values(rest), AnalyserController],
     "/": [...Object.values(pages)]
   },
   swagger: [

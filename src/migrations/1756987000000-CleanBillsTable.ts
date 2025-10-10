@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class CleanBillsTable1756987000000 implements MigrationInterface {
-    name = 'CleanBillsTable1756987000000'
+  name = "CleanBillsTable1756987000000";
 
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        // Create a clean bills table with the final structure
-        await queryRunner.query(`
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    // Create a clean bills table with the final structure
+    await queryRunner.query(`
             CREATE TABLE IF NOT EXISTS \`bills_clean\` (
                 \`id\` varchar(36) NOT NULL,
                 \`billerName\` varchar(255) NOT NULL,
@@ -26,8 +26,8 @@ export class CleanBillsTable1756987000000 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Copy data from old bills table if it exists
-        await queryRunner.query(`
+    // Copy data from old bills table if it exists
+    await queryRunner.query(`
             INSERT INTO \`bills_clean\` 
             SELECT 
                 \`id\`,
@@ -44,16 +44,16 @@ export class CleanBillsTable1756987000000 implements MigrationInterface {
             WHERE EXISTS (SELECT 1 FROM \`bills\`)
         `);
 
-        // Drop old bills table
-        await queryRunner.query(`DROP TABLE IF EXISTS \`bills\``);
+    // Drop old bills table
+    await queryRunner.query(`DROP TABLE IF EXISTS \`bills\``);
 
-        // Rename clean table to bills
-        await queryRunner.query(`RENAME TABLE \`bills_clean\` TO \`bills\``);
-    }
+    // Rename clean table to bills
+    await queryRunner.query(`RENAME TABLE \`bills_clean\` TO \`bills\``);
+  }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        // Recreate the original bills table structure
-        await queryRunner.query(`
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    // Recreate the original bills table structure
+    await queryRunner.query(`
             CREATE TABLE \`bills\` (
                 \`id\` varchar(36) NOT NULL,
                 \`billerName\` varchar(255) NOT NULL,
@@ -72,5 +72,5 @@ export class CleanBillsTable1756987000000 implements MigrationInterface {
                 CONSTRAINT \`FK_bills_folder\` FOREIGN KEY (\`folderId\`) REFERENCES \`user_folders\`(\`id\`) ON DELETE SET NULL ON UPDATE NO ACTION
             ) ENGINE=InnoDB
         `);
-    }
+  }
 }

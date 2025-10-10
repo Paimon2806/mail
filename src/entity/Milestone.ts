@@ -62,7 +62,6 @@ export class Milestone {
   @JoinColumn({ name: "userId" })
   user: User;
 
-
   // Milestone category relationship
   @ManyToOne(() => MilestoneCategory, { nullable: true })
   @JoinColumn({ name: "milestoneCategoryId" })

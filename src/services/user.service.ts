@@ -307,5 +307,4 @@ export class UserService implements IUserService {
       throw new Error(`Failed to verify PIN: ${error.message}`);
     }
   }
-
 }

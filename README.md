@@ -5,6 +5,7 @@ A comprehensive document and milestone management system built with TypeScript, 
 ## 🚀 Features
 
 ### Core Functionality
+
 - **User Management**: Firebase authentication with PIN security
 - **Document Management**: File upload, storage, and organization with S3 integration
 - **Folder System**: Hierarchical folder structure with metadata and sharing
@@ -13,6 +14,7 @@ A comprehensive document and milestone management system built with TypeScript, 
 - **Bill Management**: Payment tracking and organization
 
 ### Technical Features
+
 - **RESTful API**: Comprehensive REST endpoints with Swagger documentation
 - **File Processing**: AWS Textract integration for document text extraction
 - **Search & Filtering**: Advanced search capabilities across all entities
@@ -83,17 +85,20 @@ Once the server is running, visit `http://localhost:8083` for interactive Swagge
 ### Key Endpoints
 
 #### Authentication
+
 - `POST /rest/users` - Create user account
 - `POST /rest/users/pin/set` - Set security PIN
 - `POST /rest/users/pin/verify` - Verify PIN
 
 #### File Management
+
 - `POST /rest/files/folders/{folderId}/upload` - Get upload URL
 - `POST /rest/files/confirm` - Confirm file upload
 - `GET /rest/files` - List user files
 - `DELETE /rest/files/{fileId}` - Delete file
 
 #### Folder Management
+
 - `GET /rest/folders` - List user folders
 - `POST /rest/folders` - Create folder
 - `PUT /rest/folders/{folderId}` - Update folder
@@ -102,12 +107,14 @@ Once the server is running, visit `http://localhost:8083` for interactive Swagge
 - `POST /rest/folders/copy` - Copy folder
 
 #### Milestones
+
 - `GET /rest/milestones` - List milestones
 - `POST /rest/milestones` - Create milestone
 - `PUT /rest/milestones/{milestoneId}` - Update milestone
 - `DELETE /rest/milestones/{milestoneId}` - Delete milestone
 
 #### Onboarding
+
 - `GET /rest/onboarding/questions` - Get onboarding questions
 - `POST /rest/onboarding/submit` - Submit responses
 - `GET /rest/onboarding/status` - Check completion status
@@ -115,6 +122,7 @@ Once the server is running, visit `http://localhost:8083` for interactive Swagge
 ## 🗄️ Database Schema
 
 ### Core Entities
+
 - **Users**: User accounts with Firebase integration
 - **UserFolders**: Hierarchical folder structure
 - **Files**: Document storage with S3 integration
@@ -123,6 +131,7 @@ Once the server is running, visit `http://localhost:8083` for interactive Swagge
 - **OnboardingQuestions**: User onboarding flow
 
 ### Relationships
+
 - Users have many Folders, Files, Milestones, and Bills
 - Folders can have parent-child relationships
 - Files belong to Folders and can be linked to Milestones
@@ -139,17 +148,20 @@ Once the server is running, visit `http://localhost:8083` for interactive Swagge
 ## 🚀 Deployment
 
 ### Production Build
+
 ```bash
 npm run build
 npm run start:prod
 ```
 
 ### PM2 Process Management
+
 ```bash
 npm run pm2prod
 ```
 
 ### Docker
+
 ```bash
 docker build -t prepr-vault-backend .
 docker run -p 8083:8083 prepr-vault-backend
@@ -158,6 +170,7 @@ docker run -p 8083:8083 prepr-vault-backend
 ## 📊 Monitoring
 
 The application includes comprehensive logging and monitoring:
+
 - Request/response logging
 - Error tracking and reporting
 - Performance metrics

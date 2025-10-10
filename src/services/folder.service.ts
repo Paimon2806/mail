@@ -133,7 +133,7 @@ export class FolderService {
       }
 
       const folders = await this.userFolderRepository.findByUserId(user.id);
-      
+
       // Add bills to each folder
       for (const folder of folders) {
         const bills = await this.billRepository.findByFolder(folder.id, user.id);

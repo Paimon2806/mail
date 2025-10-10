@@ -79,5 +79,4 @@ export class File extends CustomBaseEntity {
 
   @Column({ type: "longtext", nullable: true })
   extractedText?: string;
-
 }

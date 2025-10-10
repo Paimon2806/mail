@@ -83,9 +83,7 @@ export class BillRepository {
     }
 
     // Order by payment date (upcoming first), then by created date
-    queryBuilder
-      .orderBy("bill.paymentDate", "ASC")
-      .addOrderBy("bill.createdAt", "DESC");
+    queryBuilder.orderBy("bill.paymentDate", "ASC").addOrderBy("bill.createdAt", "DESC");
 
     return await queryBuilder.getMany();
   }
@@ -220,14 +218,20 @@ export class BillRepository {
       totalAmount: parseFloat(totalAmountResult?.total || "0"),
       paidAmount: parseFloat(paidAmountResult?.total || "0"),
       pendingAmount: parseFloat(pendingAmountResult?.total || "0"),
-      categoryBreakdown: categoryBreakdown.reduce((acc, item) => {
-        acc[item.category || "Uncategorized"] = parseInt(item.count);
-        return acc;
-      }, {} as Record<string, number>),
-      cycleBreakdown: cycleBreakdown.reduce((acc, item) => {
-        acc[item.cycle] = parseInt(item.count);
-        return acc;
-      }, {} as Record<string, number>)
+      categoryBreakdown: categoryBreakdown.reduce(
+        (acc, item) => {
+          acc[item.category || "Uncategorized"] = parseInt(item.count);
+          return acc;
+        },
+        {} as Record<string, number>
+      ),
+      cycleBreakdown: cycleBreakdown.reduce(
+        (acc, item) => {
+          acc[item.cycle] = parseInt(item.count);
+          return acc;
+        },
+        {} as Record<string, number>
+      )
     };
   }
 
@@ -237,20 +241,15 @@ export class BillRepository {
       .leftJoinAndSelect("bill.user", "user")
       .leftJoinAndSelect("bill.folder", "folder")
       .where("bill.userId = :userId", { userId })
-      .andWhere(
-        "(bill.billName LIKE :query OR bill.description LIKE :query OR bill.vendor LIKE :query OR bill.category LIKE :query)",
-        { query: `%${query}%` }
-      )
+      .andWhere("(bill.billName LIKE :query OR bill.description LIKE :query OR bill.vendor LIKE :query OR bill.category LIKE :query)", {
+        query: `%${query}%`
+      })
       .orderBy("bill.paymentDate", "ASC")
       .limit(limit)
       .getMany();
   }
 
-  async findByUserAndDateRange(
-    userId: string,
-    startDate: string,
-    endDate: string
-  ): Promise<Bill[]> {
+  async findByUserAndDateRange(userId: string, startDate: string, endDate: string): Promise<Bill[]> {
     return await this.repository.find({
       where: {
         userId,

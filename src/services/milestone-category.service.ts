@@ -1,10 +1,10 @@
 import { Injectable } from "@tsed/di";
 import { MilestoneCategoryRepository } from "../repositories/milestone-category.repository";
 import { Logger } from "../utils/logger";
-import { 
-  IMilestoneCategory, 
-  ICreateMilestoneCategory, 
-  IUpdateMilestoneCategory, 
+import {
+  IMilestoneCategory,
+  ICreateMilestoneCategory,
+  IUpdateMilestoneCategory,
   IMilestoneCategoryFilters,
   IMilestoneCategoryResponse,
   IMilestoneCategoryStats
@@ -14,20 +14,11 @@ import { ValidationError } from "ajv";
 
 @Injectable()
 export class MilestoneCategoryService {
-  constructor(
-    private readonly milestoneCategoryRepository: MilestoneCategoryRepository
-  ) {}
+  constructor(private readonly milestoneCategoryRepository: MilestoneCategoryRepository) {}
 
-  async createMilestoneCategory(
-    createData: ICreateMilestoneCategory,
-    userId: string
-  ): Promise<IMilestoneCategoryResponse> {
-
+  async createMilestoneCategory(createData: ICreateMilestoneCategory, userId: string): Promise<IMilestoneCategoryResponse> {
     // Check for duplicate name within the same scope
-    const existingCategory = await this.milestoneCategoryRepository.findByName(
-      createData.name,
-      createData.isPublic ? undefined : userId
-    );
+    const existingCategory = await this.milestoneCategoryRepository.findByName(createData.name, createData.isPublic ? undefined : userId);
 
     if (existingCategory) {
       throw new BadRequestException(`A milestone category with the name "${createData.name}" already exists`);
@@ -49,14 +40,9 @@ export class MilestoneCategoryService {
     limit: number = 20,
     offset: number = 0
   ): Promise<{ categories: IMilestoneCategoryResponse[]; total: number; hasMore: boolean }> {
-    const result = await this.milestoneCategoryRepository.findByUserWithPagination(
-      userId,
-      filters,
-      limit,
-      offset
-    );
+    const result = await this.milestoneCategoryRepository.findByUserWithPagination(userId, filters, limit, offset);
 
-    const categories = result.categories.map(category => this.transformToResponse(category));
+    const categories = result.categories.map((category) => this.transformToResponse(category));
 
     return {
       categories,
@@ -76,23 +62,15 @@ export class MilestoneCategoryService {
 
   async getPublicMilestoneCategories(filters: IMilestoneCategoryFilters = {}): Promise<IMilestoneCategoryResponse[]> {
     const categories = await this.milestoneCategoryRepository.findPublicCategories(filters);
-    return categories.map(category => this.transformToResponse(category));
+    return categories.map((category) => this.transformToResponse(category));
   }
 
-  async getPersonalMilestoneCategories(
-    userId: string,
-    filters: IMilestoneCategoryFilters = {}
-  ): Promise<IMilestoneCategoryResponse[]> {
+  async getPersonalMilestoneCategories(userId: string, filters: IMilestoneCategoryFilters = {}): Promise<IMilestoneCategoryResponse[]> {
     const categories = await this.milestoneCategoryRepository.findPersonalCategories(userId, filters);
-    return categories.map(category => this.transformToResponse(category));
+    return categories.map((category) => this.transformToResponse(category));
   }
 
-
-  async updateMilestoneCategory(
-    id: string,
-    updateData: IUpdateMilestoneCategory,
-    userId: string
-  ): Promise<IMilestoneCategoryResponse> {
+  async updateMilestoneCategory(id: string, updateData: IUpdateMilestoneCategory, userId: string): Promise<IMilestoneCategoryResponse> {
     const existingCategory = await this.milestoneCategoryRepository.findByIdAndUser(id, userId);
     if (!existingCategory) {
       throw new NotFoundException("Milestone category not found");
@@ -103,7 +81,6 @@ export class MilestoneCategoryService {
       throw new NotFoundException("Milestone category not found");
     }
 
-
     // Check for duplicate name if name is being updated
     if (updateData.name && updateData.name !== existingCategory.name) {
       const duplicateCategory = await this.milestoneCategoryRepository.findByName(
@@ -112,7 +89,7 @@ export class MilestoneCategoryService {
       );
 
       if (duplicateCategory && duplicateCategory.id !== id) {
-            throw new BadRequestException(`A milestone category with the name "${updateData.name}" already exists`);
+        throw new BadRequestException(`A milestone category with the name "${updateData.name}" already exists`);
       }
     }
 
@@ -146,29 +123,20 @@ export class MilestoneCategoryService {
     return await this.milestoneCategoryRepository.getStats(userId);
   }
 
-  async searchMilestoneCategories(
-    query: string,
-    userId: string,
-    limit: number = 20
-  ): Promise<IMilestoneCategoryResponse[]> {
+  async searchMilestoneCategories(query: string, userId: string, limit: number = 20): Promise<IMilestoneCategoryResponse[]> {
     const filters: IMilestoneCategoryFilters = {
       search: query
     };
 
-    const result = await this.milestoneCategoryRepository.findByUserWithPagination(
-      userId,
-      filters,
-      limit,
-      0
-    );
+    const result = await this.milestoneCategoryRepository.findByUserWithPagination(userId, filters, limit, 0);
 
-    return result.categories.map(category => this.transformToResponse(category));
+    return result.categories.map((category) => this.transformToResponse(category));
   }
 
   // Admin methods for managing default categories
   async getDefaultCategories(): Promise<IMilestoneCategoryResponse[]> {
     const categories = await this.milestoneCategoryRepository.findPublicCategories({ isActive: true });
-    return categories.map(category => this.transformToResponse(category));
+    return categories.map((category) => this.transformToResponse(category));
   }
 
   async createDefaultCategory(createData: ICreateMilestoneCategory): Promise<IMilestoneCategoryResponse> {

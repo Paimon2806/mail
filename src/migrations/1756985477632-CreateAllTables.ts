@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class CreateAllTables1756985477632 implements MigrationInterface {
-    name = 'CreateAllTables1756985477632'
+  name = "CreateAllTables1756985477632";
 
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        // Create users table
-        await queryRunner.query(`
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    // Create users table
+    await queryRunner.query(`
             CREATE TABLE \`users\` (
                 \`id\` varchar(36) NOT NULL,
                 \`firebaseUid\` varchar(255) NOT NULL,
@@ -27,8 +27,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create onboarding_questions table
-        await queryRunner.query(`
+    // Create onboarding_questions table
+    await queryRunner.query(`
             CREATE TABLE \`onboarding_questions\` (
                 \`id\` varchar(36) NOT NULL,
                 \`questionText\` varchar(255) NOT NULL,
@@ -44,8 +44,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create onboarding_question_options table
-        await queryRunner.query(`
+    // Create onboarding_question_options table
+    await queryRunner.query(`
             CREATE TABLE \`onboarding_question_options\` (
                 \`id\` varchar(36) NOT NULL,
                 \`optionText\` varchar(255) NOT NULL,
@@ -60,8 +60,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create user_onboarding_responses table
-        await queryRunner.query(`
+    // Create user_onboarding_responses table
+    await queryRunner.query(`
             CREATE TABLE \`user_onboarding_responses\` (
                 \`id\` varchar(36) NOT NULL,
                 \`userId\` varchar(36) NOT NULL,
@@ -78,8 +78,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create folder_templates table
-        await queryRunner.query(`
+    // Create folder_templates table
+    await queryRunner.query(`
             CREATE TABLE \`folder_templates\` (
                 \`id\` varchar(36) NOT NULL,
                 \`folderName\` varchar(255) NOT NULL,
@@ -97,8 +97,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create user_folders table
-        await queryRunner.query(`
+    // Create user_folders table
+    await queryRunner.query(`
             CREATE TABLE \`user_folders\` (
                 \`id\` varchar(36) NOT NULL,
                 \`folderName\` varchar(255) NOT NULL,
@@ -118,8 +118,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create milestone_categories table
-        await queryRunner.query(`
+    // Create milestone_categories table
+    await queryRunner.query(`
             CREATE TABLE \`milestone_categories\` (
                 \`id\` varchar(36) NOT NULL,
                 \`name\` varchar(100) NOT NULL,
@@ -139,8 +139,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create milestones table
-        await queryRunner.query(`
+    // Create milestones table
+    await queryRunner.query(`
             CREATE TABLE \`milestones\` (
                 \`id\` varchar(36) NOT NULL,
                 \`title\` varchar(255) NOT NULL,
@@ -164,8 +164,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create files table
-        await queryRunner.query(`
+    // Create files table
+    await queryRunner.query(`
             CREATE TABLE \`files\` (
                 \`id\` varchar(36) NOT NULL,
                 \`fileName\` varchar(255) NOT NULL,
@@ -196,8 +196,8 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Create bills table
-        await queryRunner.query(`
+    // Create bills table
+    await queryRunner.query(`
             CREATE TABLE \`bills\` (
                 \`id\` varchar(36) NOT NULL,
                 \`billName\` varchar(255) NOT NULL,
@@ -227,133 +227,133 @@ export class CreateAllTables1756985477632 implements MigrationInterface {
             ) ENGINE=InnoDB
         `);
 
-        // Add foreign key constraints
-        await queryRunner.query(`
+    // Add foreign key constraints
+    await queryRunner.query(`
             ALTER TABLE \`onboarding_question_options\`
             ADD CONSTRAINT \`FK_onboarding_question_options_question\`
             FOREIGN KEY (\`questionId\`) REFERENCES \`onboarding_questions\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`user_onboarding_responses\`
             ADD CONSTRAINT \`FK_user_onboarding_responses_user\`
             FOREIGN KEY (\`userId\`) REFERENCES \`users\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`user_onboarding_responses\`
             ADD CONSTRAINT \`FK_user_onboarding_responses_question\`
             FOREIGN KEY (\`questionId\`) REFERENCES \`onboarding_questions\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`user_onboarding_responses\`
             ADD CONSTRAINT \`FK_user_onboarding_responses_selected_option\`
             FOREIGN KEY (\`selectedOptionId\`) REFERENCES \`onboarding_question_options\`(\`id\`) ON DELETE SET NULL ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`folder_templates\`
             ADD CONSTRAINT \`FK_folder_templates_parent\`
             FOREIGN KEY (\`parentId\`) REFERENCES \`folder_templates\`(\`id\`) ON DELETE SET NULL ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`folder_templates\`
             ADD CONSTRAINT \`FK_folder_templates_question_option\`
             FOREIGN KEY (\`questionOptionId\`) REFERENCES \`onboarding_question_options\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`user_folders\`
             ADD CONSTRAINT \`FK_user_folders_parent\`
             FOREIGN KEY (\`parentId\`) REFERENCES \`user_folders\`(\`id\`) ON DELETE SET NULL ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`user_folders\`
             ADD CONSTRAINT \`FK_user_folders_user\`
             FOREIGN KEY (\`userId\`) REFERENCES \`users\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`milestone_categories\`
             ADD CONSTRAINT \`FK_milestone_categories_user\`
             FOREIGN KEY (\`userId\`) REFERENCES \`users\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`milestones\`
             ADD CONSTRAINT \`FK_milestones_user\`
             FOREIGN KEY (\`userId\`) REFERENCES \`users\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`milestones\`
             ADD CONSTRAINT \`FK_milestones_milestone_category\`
             FOREIGN KEY (\`milestoneCategoryId\`) REFERENCES \`milestone_categories\`(\`id\`) ON DELETE SET NULL ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`files\`
             ADD CONSTRAINT \`FK_files_user\`
             FOREIGN KEY (\`userId\`) REFERENCES \`users\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`files\`
             ADD CONSTRAINT \`FK_files_folder\`
             FOREIGN KEY (\`folderId\`) REFERENCES \`user_folders\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`files\`
             ADD CONSTRAINT \`FK_files_milestone\`
             FOREIGN KEY (\`milestoneId\`) REFERENCES \`milestones\`(\`id\`) ON DELETE SET NULL ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`bills\`
             ADD CONSTRAINT \`FK_bills_user\`
             FOREIGN KEY (\`userId\`) REFERENCES \`users\`(\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         `);
 
-        await queryRunner.query(`
+    await queryRunner.query(`
             ALTER TABLE \`bills\`
             ADD CONSTRAINT \`FK_bills_folder\`
             FOREIGN KEY (\`folderId\`) REFERENCES \`user_folders\`(\`id\`) ON DELETE SET NULL ON UPDATE NO ACTION
         `);
-    }
+  }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        // Drop foreign key constraints first
-        await queryRunner.query(`ALTER TABLE \`bills\` DROP FOREIGN KEY \`FK_bills_folder\``);
-        await queryRunner.query(`ALTER TABLE \`bills\` DROP FOREIGN KEY \`FK_bills_user\``);
-        await queryRunner.query(`ALTER TABLE \`files\` DROP FOREIGN KEY \`FK_files_milestone\``);
-        await queryRunner.query(`ALTER TABLE \`files\` DROP FOREIGN KEY \`FK_files_folder\``);
-        await queryRunner.query(`ALTER TABLE \`files\` DROP FOREIGN KEY \`FK_files_user\``);
-        await queryRunner.query(`ALTER TABLE \`milestones\` DROP FOREIGN KEY \`FK_milestones_milestone_category\``);
-        await queryRunner.query(`ALTER TABLE \`milestones\` DROP FOREIGN KEY \`FK_milestones_user\``);
-        await queryRunner.query(`ALTER TABLE \`milestone_categories\` DROP FOREIGN KEY \`FK_milestone_categories_user\``);
-        await queryRunner.query(`ALTER TABLE \`user_folders\` DROP FOREIGN KEY \`FK_user_folders_user\``);
-        await queryRunner.query(`ALTER TABLE \`user_folders\` DROP FOREIGN KEY \`FK_user_folders_parent\``);
-        await queryRunner.query(`ALTER TABLE \`folder_templates\` DROP FOREIGN KEY \`FK_folder_templates_question_option\``);
-        await queryRunner.query(`ALTER TABLE \`folder_templates\` DROP FOREIGN KEY \`FK_folder_templates_parent\``);
-        await queryRunner.query(`ALTER TABLE \`user_onboarding_responses\` DROP FOREIGN KEY \`FK_user_onboarding_responses_selected_option\``);
-        await queryRunner.query(`ALTER TABLE \`user_onboarding_responses\` DROP FOREIGN KEY \`FK_user_onboarding_responses_question\``);
-        await queryRunner.query(`ALTER TABLE \`user_onboarding_responses\` DROP FOREIGN KEY \`FK_user_onboarding_responses_user\``);
-        await queryRunner.query(`ALTER TABLE \`onboarding_question_options\` DROP FOREIGN KEY \`FK_onboarding_question_options_question\``);
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    // Drop foreign key constraints first
+    await queryRunner.query(`ALTER TABLE \`bills\` DROP FOREIGN KEY \`FK_bills_folder\``);
+    await queryRunner.query(`ALTER TABLE \`bills\` DROP FOREIGN KEY \`FK_bills_user\``);
+    await queryRunner.query(`ALTER TABLE \`files\` DROP FOREIGN KEY \`FK_files_milestone\``);
+    await queryRunner.query(`ALTER TABLE \`files\` DROP FOREIGN KEY \`FK_files_folder\``);
+    await queryRunner.query(`ALTER TABLE \`files\` DROP FOREIGN KEY \`FK_files_user\``);
+    await queryRunner.query(`ALTER TABLE \`milestones\` DROP FOREIGN KEY \`FK_milestones_milestone_category\``);
+    await queryRunner.query(`ALTER TABLE \`milestones\` DROP FOREIGN KEY \`FK_milestones_user\``);
+    await queryRunner.query(`ALTER TABLE \`milestone_categories\` DROP FOREIGN KEY \`FK_milestone_categories_user\``);
+    await queryRunner.query(`ALTER TABLE \`user_folders\` DROP FOREIGN KEY \`FK_user_folders_user\``);
+    await queryRunner.query(`ALTER TABLE \`user_folders\` DROP FOREIGN KEY \`FK_user_folders_parent\``);
+    await queryRunner.query(`ALTER TABLE \`folder_templates\` DROP FOREIGN KEY \`FK_folder_templates_question_option\``);
+    await queryRunner.query(`ALTER TABLE \`folder_templates\` DROP FOREIGN KEY \`FK_folder_templates_parent\``);
+    await queryRunner.query(`ALTER TABLE \`user_onboarding_responses\` DROP FOREIGN KEY \`FK_user_onboarding_responses_selected_option\``);
+    await queryRunner.query(`ALTER TABLE \`user_onboarding_responses\` DROP FOREIGN KEY \`FK_user_onboarding_responses_question\``);
+    await queryRunner.query(`ALTER TABLE \`user_onboarding_responses\` DROP FOREIGN KEY \`FK_user_onboarding_responses_user\``);
+    await queryRunner.query(`ALTER TABLE \`onboarding_question_options\` DROP FOREIGN KEY \`FK_onboarding_question_options_question\``);
 
-        // Drop tables
-        await queryRunner.query(`DROP TABLE \`bills\``);
-        await queryRunner.query(`DROP TABLE \`files\``);
-        await queryRunner.query(`DROP TABLE \`milestones\``);
-        await queryRunner.query(`DROP TABLE \`milestone_categories\``);
-        await queryRunner.query(`DROP TABLE \`user_folders\``);
-        await queryRunner.query(`DROP TABLE \`folder_templates\``);
-        await queryRunner.query(`DROP TABLE \`user_onboarding_responses\``);
-        await queryRunner.query(`DROP TABLE \`onboarding_question_options\``);
-        await queryRunner.query(`DROP TABLE \`onboarding_questions\``);
-        await queryRunner.query(`DROP TABLE \`users\``);
-    }
+    // Drop tables
+    await queryRunner.query(`DROP TABLE \`bills\``);
+    await queryRunner.query(`DROP TABLE \`files\``);
+    await queryRunner.query(`DROP TABLE \`milestones\``);
+    await queryRunner.query(`DROP TABLE \`milestone_categories\``);
+    await queryRunner.query(`DROP TABLE \`user_folders\``);
+    await queryRunner.query(`DROP TABLE \`folder_templates\``);
+    await queryRunner.query(`DROP TABLE \`user_onboarding_responses\``);
+    await queryRunner.query(`DROP TABLE \`onboarding_question_options\``);
+    await queryRunner.query(`DROP TABLE \`onboarding_questions\``);
+    await queryRunner.query(`DROP TABLE \`users\``);
+  }
 }

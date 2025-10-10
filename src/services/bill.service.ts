@@ -1,14 +1,7 @@
 import { Injectable } from "@tsed/di";
 import { BillRepository, IBillFilters } from "../repositories/bill.repository";
 import { UserFolderRepository } from "../repositories/user-folder.repository";
-import { 
-  CreateBillDto, 
-  UpdateBillDto, 
-  BillResponseDto, 
-  ScanBillDto, 
-  ScanBillResponseDto,
-  BillStatsDto
-} from "../schemas/BillDto";
+import { CreateBillDto, UpdateBillDto, BillResponseDto, ScanBillDto, ScanBillResponseDto, BillStatsDto } from "../schemas/BillDto";
 import { NotFoundException, BadRequestException } from "../exceptions/AppException";
 import { Bill } from "../entity/Bill";
 
@@ -18,7 +11,6 @@ export class BillService {
     private readonly billRepository: BillRepository,
     private readonly userFolderRepository: UserFolderRepository
   ) {}
-
 
   async createBill(createData: CreateBillDto, userId: string): Promise<BillResponseDto> {
     // Validate folder if provided
@@ -59,7 +51,7 @@ export class BillService {
 
   async getBills(userId: string, filters: IBillFilters = {}): Promise<BillResponseDto[]> {
     const bills = await this.billRepository.findByUser(userId, filters);
-    return bills.map(bill => this.transformToResponse(bill));
+    return bills.map((bill) => this.transformToResponse(bill));
   }
 
   async getBillById(id: string, userId: string): Promise<BillResponseDto> {
@@ -87,15 +79,15 @@ export class BillService {
 
     // Convert date strings to Date objects if provided
     const updateFields: Partial<Bill> = { ...updateData };
-    
+
     if (updateData.paymentDate) {
       updateFields.paymentDate = new Date(updateData.paymentDate);
     }
-    
+
     if (updateData.reminderDate) {
       updateFields.reminderDate = new Date(updateData.reminderDate);
     }
-    
+
     if (updateData.paidAt) {
       updateFields.paidAt = new Date(updateData.paidAt);
     }
@@ -117,7 +109,6 @@ export class BillService {
     return await this.billRepository.deleteByUser(id, userId);
   }
 
-
   private transformToResponse(bill: Bill): BillResponseDto {
     return {
       id: bill.id,
@@ -125,7 +116,7 @@ export class BillService {
       amount: bill.amount,
       currency: bill.currency,
       paymentCycle: bill.paymentCycle,
-      paymentDate: bill.paymentDate.toISOString().split('T')[0], // Format as YYYY-MM-DD
+      paymentDate: bill.paymentDate.toISOString().split("T")[0], // Format as YYYY-MM-DD
       description: bill.description,
       category: bill.category,
       vendor: bill.vendor,
@@ -134,7 +125,7 @@ export class BillService {
       isActive: bill.isActive,
       isPaid: bill.isPaid,
       paidAt: bill.paidAt ? bill.paidAt.toISOString() : undefined,
-      reminderDate: bill.reminderDate ? bill.reminderDate.toISOString().split('T')[0] : undefined,
+      reminderDate: bill.reminderDate ? bill.reminderDate.toISOString().split("T")[0] : undefined,
       scannedData: bill.scannedData,
       metadata: bill.metadata,
       folderId: bill.folderId,

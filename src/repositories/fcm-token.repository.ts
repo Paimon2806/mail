@@ -24,7 +24,7 @@ export class FcmTokenRepository {
 
   // Find FCM token by token value
   async findByToken(token: string): Promise<FcmToken | null> {
-    return await this.repository.findOne({ 
+    return await this.repository.findOne({
       where: { token },
       relations: ["user"]
     });
@@ -32,7 +32,7 @@ export class FcmTokenRepository {
 
   // Find FCM tokens by user ID
   async findByUserId(userId: string): Promise<FcmToken[]> {
-    return await this.repository.find({ 
+    return await this.repository.find({
       where: { userId },
       order: { createdAt: "DESC" }
     });
@@ -40,7 +40,7 @@ export class FcmTokenRepository {
 
   // Find FCM token by user ID and token
   async findByUserIdAndToken(userId: string, token: string): Promise<FcmToken | null> {
-    return await this.repository.findOne({ 
+    return await this.repository.findOne({
       where: { userId, token }
     });
   }
@@ -48,7 +48,7 @@ export class FcmTokenRepository {
   // Update or create FCM token for user
   async upsertByUserId(userId: string, token: string): Promise<FcmToken> {
     // First, try to find existing token for this user
-    const existingToken = await this.repository.findOne({ 
+    const existingToken = await this.repository.findOne({
       where: { userId, token }
     });
 
@@ -58,7 +58,7 @@ export class FcmTokenRepository {
 
     // If token doesn't exist for this user, create new one
     // But first, check if this token exists for another user and remove it
-    const existingTokenForOtherUser = await this.repository.findOne({ 
+    const existingTokenForOtherUser = await this.repository.findOne({
       where: { token }
     });
 

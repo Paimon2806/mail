@@ -8,7 +8,7 @@ export class CreateBillDto {
 
   @Property()
   @Required()
-  @Example(150.50)
+  @Example(150.5)
   amount: number;
 
   @Property()
@@ -135,7 +135,7 @@ export class BillResponseDto {
   billName: string;
 
   @Property()
-  @Example(150.50)
+  @Example(150.5)
   amount: number;
 
   @Property()
@@ -278,7 +278,7 @@ export class ScanBillResponseDto {
   billName?: string;
 
   @Property()
-  @Example(150.50)
+  @Example(150.5)
   amount?: number;
 
   @Property()
@@ -340,14 +340,14 @@ export class BillStatsDto {
   paidAmount: number;
 
   @Property()
-  @Example(1000.60)
+  @Example(1000.6)
   pendingAmount: number;
 
   @Property()
-  @Example({ "Utilities": 5, "Insurance": 3, "Rent": 1 })
+  @Example({ Utilities: 5, Insurance: 3, Rent: 1 })
   categoryBreakdown: Record<string, number>;
 
   @Property()
-  @Example({ "monthly": 15, "quarterly": 5, "yearly": 5 })
+  @Example({ monthly: 15, quarterly: 5, yearly: 5 })
   cycleBreakdown: Record<string, number>;
 }

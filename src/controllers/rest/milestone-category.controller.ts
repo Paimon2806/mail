@@ -26,24 +26,16 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<{ categories: MilestoneCategoryResponseDto[]; total: number; hasMore: boolean }>> {
     const limit = parseInt(searchDto.limit || "20");
     const offset = parseInt(searchDto.offset || "0");
-    
+
     const filters = {
       isPublic: searchDto.isPublic ? searchDto.isPublic === "true" : undefined,
       isActive: searchDto.isActive ? searchDto.isActive === "true" : undefined,
       search: searchDto.search
     };
 
-    const result = await this.milestoneCategoryService.getMilestoneCategoriesWithPagination(
-      _user.uid,
-      filters,
-      limit,
-      offset
-    );
+    const result = await this.milestoneCategoryService.getMilestoneCategoriesWithPagination(_user.uid, filters, limit, offset);
 
-    return new ApiResponse(
-      result,
-      "Milestone categories retrieved successfully"
-    );
+    return new ApiResponse(result, "Milestone categories retrieved successfully");
   }
 
   @Get("/public")
@@ -58,10 +50,7 @@ export class MilestoneCategoryController {
 
     const categories = await this.milestoneCategoryService.getPublicMilestoneCategories(filters);
 
-    return new ApiResponse(
-      categories,
-      "Public milestone categories retrieved successfully"
-    );
+    return new ApiResponse(categories, "Public milestone categories retrieved successfully");
   }
 
   @Get("/personal")
@@ -77,12 +66,8 @@ export class MilestoneCategoryController {
 
     const categories = await this.milestoneCategoryService.getPersonalMilestoneCategories(_user.uid, filters);
 
-    return new ApiResponse(
-      categories,
-      "Personal milestone categories retrieved successfully"
-    );
+    return new ApiResponse(categories, "Personal milestone categories retrieved successfully");
   }
-
 
   @Get("/:id")
   @CustomAuth("Get milestone category by ID")
@@ -92,10 +77,7 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<MilestoneCategoryResponseDto>> {
     const category = await this.milestoneCategoryService.getMilestoneCategoryById(id, _user.uid);
 
-    return new ApiResponse(
-      category,
-      "Milestone category retrieved successfully"
-    );
+    return new ApiResponse(category, "Milestone category retrieved successfully");
   }
 
   @Post("/")
@@ -106,10 +88,7 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<MilestoneCategoryResponseDto>> {
     const category = await this.milestoneCategoryService.createMilestoneCategory(createDto, _user.uid);
 
-    return new ApiResponse(
-      category,
-      "Milestone category created successfully"
-    );
+    return new ApiResponse(category, "Milestone category created successfully");
   }
 
   @Put("/:id")
@@ -121,10 +100,7 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<MilestoneCategoryResponseDto>> {
     const category = await this.milestoneCategoryService.updateMilestoneCategory(id, updateDto, _user.uid);
 
-    return new ApiResponse(
-      category,
-      "Milestone category updated successfully"
-    );
+    return new ApiResponse(category, "Milestone category updated successfully");
   }
 
   @Delete("/:id")
@@ -135,23 +111,15 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<{ success: boolean; message: string }>> {
     const success = await this.milestoneCategoryService.deleteMilestoneCategory(id, _user.uid);
 
-    return new ApiResponse(
-      { success, message: "Milestone category deleted successfully" },
-      "Milestone category deleted successfully"
-    );
+    return new ApiResponse({ success, message: "Milestone category deleted successfully" }, "Milestone category deleted successfully");
   }
 
   @Get("/stats/overview")
   @CustomAuth("Get milestone category statistics")
-  async getMilestoneCategoryStats(
-    @Context("auth") _user: DecodedIdToken
-  ): Promise<ApiResponse<MilestoneCategoryStatsDto>> {
+  async getMilestoneCategoryStats(@Context("auth") _user: DecodedIdToken): Promise<ApiResponse<MilestoneCategoryStatsDto>> {
     const stats = await this.milestoneCategoryService.getMilestoneCategoryStats(_user.uid);
 
-    return new ApiResponse(
-      stats,
-      "Milestone category statistics retrieved successfully"
-    );
+    return new ApiResponse(stats, "Milestone category statistics retrieved successfully");
   }
 
   @Get("/search/query")
@@ -164,24 +132,16 @@ export class MilestoneCategoryController {
     const searchLimit = parseInt(limit);
     const categories = await this.milestoneCategoryService.searchMilestoneCategories(query, _user.uid, searchLimit);
 
-    return new ApiResponse(
-      categories,
-      "Search results retrieved successfully"
-    );
+    return new ApiResponse(categories, "Search results retrieved successfully");
   }
 
   // Admin endpoints for managing default categories
   @Get("/admin/default")
   @CustomAuth("Admin: Get default milestone categories")
-  async getDefaultMilestoneCategories(
-    @Context("auth") _user: DecodedIdToken
-  ): Promise<ApiResponse<MilestoneCategoryResponseDto[]>> {
+  async getDefaultMilestoneCategories(@Context("auth") _user: DecodedIdToken): Promise<ApiResponse<MilestoneCategoryResponseDto[]>> {
     const categories = await this.milestoneCategoryService.getDefaultCategories();
 
-    return new ApiResponse(
-      categories,
-      "Default milestone categories retrieved successfully"
-    );
+    return new ApiResponse(categories, "Default milestone categories retrieved successfully");
   }
 
   @Post("/admin/default")
@@ -192,10 +152,7 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<MilestoneCategoryResponseDto>> {
     const category = await this.milestoneCategoryService.createDefaultCategory(createDto);
 
-    return new ApiResponse(
-      category,
-      "Default milestone category created successfully"
-    );
+    return new ApiResponse(category, "Default milestone category created successfully");
   }
 
   @Put("/admin/default/:id")
@@ -207,10 +164,7 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<MilestoneCategoryResponseDto>> {
     const category = await this.milestoneCategoryService.updateDefaultCategory(id, updateDto);
 
-    return new ApiResponse(
-      category,
-      "Default milestone category updated successfully"
-    );
+    return new ApiResponse(category, "Default milestone category updated successfully");
   }
 
   @Delete("/admin/default/:id")
@@ -234,9 +188,6 @@ export class MilestoneCategoryController {
   ): Promise<ApiResponse<{ success: boolean; message: string; categories: MilestoneCategoryResponseDto[] }>> {
     const result = await this.milestoneCategoryService.seedDefaultCategories();
 
-    return new ApiResponse(
-      result,
-      "Default milestone categories seeded successfully"
-    );
+    return new ApiResponse(result, "Default milestone categories seeded successfully");
   }
 }

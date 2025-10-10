@@ -32,10 +32,7 @@ export class MilestoneService {
     }
 
     // Validate milestone category exists and is accessible to user
-    const category = await this.milestoneCategoryRepository.findByIdAndUser(
-      milestoneData.milestoneCategoryId, 
-      userId
-    );
+    const category = await this.milestoneCategoryRepository.findByIdAndUser(milestoneData.milestoneCategoryId, userId);
     if (!category) {
       throw new BusinessValidationException("Invalid milestone category");
     }
@@ -107,10 +104,7 @@ export class MilestoneService {
 
     // Validate milestone category if provided
     if (updateData.milestoneCategoryId) {
-      const category = await this.milestoneCategoryRepository.findByIdAndUser(
-        updateData.milestoneCategoryId, 
-        userId
-      );
+      const category = await this.milestoneCategoryRepository.findByIdAndUser(updateData.milestoneCategoryId, userId);
       if (!category) {
         throw new BusinessValidationException("Invalid milestone category");
       }
@@ -169,8 +163,8 @@ export class MilestoneService {
     // Get both public and user's personal categories
     const publicCategories = await this.milestoneCategoryRepository.findPublic();
     const personalCategories = await this.milestoneCategoryRepository.findByUserId(userId);
-    
-    return [...publicCategories, ...personalCategories].map(category => ({
+
+    return [...publicCategories, ...personalCategories].map((category) => ({
       id: category.id,
       name: category.name,
       icon: category.icon,

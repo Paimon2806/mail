@@ -203,9 +203,7 @@ export class UserController {
   @Returns(200, ApiResponse)
   @Returns(401, ApiResponse)
   @Returns(404, ApiResponse)
-  async getUserFcmTokens(
-    @Context("auth") auth: DecodedIdToken | undefined | null
-  ): Promise<ApiResponse<any[]>> {
+  async getUserFcmTokens(@Context("auth") auth: DecodedIdToken | undefined | null): Promise<ApiResponse<any[]>> {
     try {
       const user = await this.userService.getUserById(auth?.uid as string);
       if (!user) {

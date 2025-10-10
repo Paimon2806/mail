@@ -44,7 +44,6 @@ export class MilestoneCategory extends CustomBaseEntity {
   @Column({ type: "varchar", length: 36, nullable: true })
   userId?: string; // null for public categories, user ID for personal categories
 
-
   @Column({ type: "json", nullable: true })
   metadata?: any;
 
@@ -52,7 +51,6 @@ export class MilestoneCategory extends CustomBaseEntity {
   @ManyToOne(() => User, { nullable: true, onDelete: "CASCADE" })
   @JoinColumn({ name: "userId" })
   user?: User;
-
 
   @OneToMany(() => Milestone, (milestone) => milestone.milestoneCategory)
   milestones?: Milestone[];

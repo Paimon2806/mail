@@ -15,13 +15,13 @@ export class EmailClassificationController {
   @CustomAuth("Classify email content")
   @Summary("Classify email content using zero-shot learning")
   @Description("Sends email content to a zero-shot classification model and returns the label with the highest probability score.")
-  @Returns(200, ApiResponse).Of(ClassificationResultDto).Example({
-    success: true,
-    message: "Email classified successfully",
-    data: [
-      { label: "Shipping Update", score: 0.975 }
-    ]
-  })
+  @(Returns(200, ApiResponse)
+    .Of(ClassificationResultDto)
+    .Example({
+      success: true,
+      message: "Email classified successfully",
+      data: [{ label: "Shipping Update", score: 0.975 }]
+    }))
   @Returns(400, ApiResponse)
   @Returns(401, ApiResponse)
   async classifyEmail(
@@ -32,10 +32,7 @@ export class EmailClassificationController {
       // In a real application, you might want to use auth.uid for logging or specific user-related logic
       // For this task, we are focusing on the classification logic itself.
 
-      const results = await this.emailClassificationService.classifyEmail(
-        request.emailContent,
-        request.candidateLabels
-      );
+      const results = await this.emailClassificationService.classifyEmail(request.emailContent, request.candidateLabels);
 
       return new ApiResponse(results, "Email classified successfully");
     } catch (error) {

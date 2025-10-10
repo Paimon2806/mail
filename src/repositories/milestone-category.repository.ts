@@ -56,7 +56,6 @@ export class MilestoneCategoryRepository {
       queryBuilder.andWhere("milestoneCategory.isActive = :isActive", { isActive: filters.isActive });
     }
 
-
     if (filters.search) {
       queryBuilder.andWhere("(milestoneCategory.name LIKE :search OR milestoneCategory.description LIKE :search)", {
         search: `%${filters.search}%`
@@ -81,7 +80,6 @@ export class MilestoneCategoryRepository {
     if (filters.isActive !== undefined) {
       totalQuery.andWhere("milestoneCategory.isActive = :isActive", { isActive: filters.isActive });
     }
-
 
     if (filters.search) {
       totalQuery.andWhere("(milestoneCategory.name LIKE :search OR milestoneCategory.description LIKE :search)", {
@@ -117,7 +115,6 @@ export class MilestoneCategoryRepository {
       queryBuilder.andWhere("milestoneCategory.isActive = :isActive", { isActive: filters.isActive });
     }
 
-
     if (filters.search) {
       queryBuilder.andWhere("(milestoneCategory.name LIKE :search OR milestoneCategory.description LIKE :search)", {
         search: `%${filters.search}%`
@@ -142,7 +139,6 @@ export class MilestoneCategoryRepository {
       queryBuilder.andWhere("milestoneCategory.isActive = :isActive", { isActive: filters.isActive });
     }
 
-
     if (filters.search) {
       queryBuilder.andWhere("(milestoneCategory.name LIKE :search OR milestoneCategory.description LIKE :search)", {
         search: `%${filters.search}%`
@@ -153,7 +149,6 @@ export class MilestoneCategoryRepository {
 
     return await queryBuilder.getMany();
   }
-
 
   async update(id: string, updateData: Partial<MilestoneCategory>): Promise<MilestoneCategory | null> {
     const result = await this.repository.update(id, updateData);

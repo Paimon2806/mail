@@ -91,29 +91,134 @@ const seedData: SeedData = {
 
   folderTemplates: [
     // Emergency Fund templates
-    { id: uuidv4(), folderName: "Emergency Fund", description: "Essential documents for emergency situations", folderIcon: "🚨", questionOptionId: "q1-opt1", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Insurance Documents", description: "All insurance policies and claims", folderIcon: "🛡️", questionOptionId: "q1-opt1", sortOrder: 2 },
-    { id: uuidv4(), folderName: "Emergency Contacts", description: "Important contact information", folderIcon: "📞", questionOptionId: "q1-opt1", sortOrder: 3 },
+    {
+      id: uuidv4(),
+      folderName: "Emergency Fund",
+      description: "Essential documents for emergency situations",
+      folderIcon: "🚨",
+      questionOptionId: "q1-opt1",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Insurance Documents",
+      description: "All insurance policies and claims",
+      folderIcon: "🛡️",
+      questionOptionId: "q1-opt1",
+      sortOrder: 2
+    },
+    {
+      id: uuidv4(),
+      folderName: "Emergency Contacts",
+      description: "Important contact information",
+      folderIcon: "📞",
+      questionOptionId: "q1-opt1",
+      sortOrder: 3
+    },
 
     // Retirement templates
-    { id: uuidv4(), folderName: "Retirement Planning", description: "Retirement account documents and planning", folderIcon: "🏖️", questionOptionId: "q1-opt2", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Pension Documents", description: "Pension and superannuation documents", folderIcon: "💰", questionOptionId: "q1-opt2", sortOrder: 2 },
-    { id: uuidv4(), folderName: "Social Security", description: "Social security and government benefits", folderIcon: "🏛️", questionOptionId: "q1-opt2", sortOrder: 3 },
+    {
+      id: uuidv4(),
+      folderName: "Retirement Planning",
+      description: "Retirement account documents and planning",
+      folderIcon: "🏖️",
+      questionOptionId: "q1-opt2",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Pension Documents",
+      description: "Pension and superannuation documents",
+      folderIcon: "💰",
+      questionOptionId: "q1-opt2",
+      sortOrder: 2
+    },
+    {
+      id: uuidv4(),
+      folderName: "Social Security",
+      description: "Social security and government benefits",
+      folderIcon: "🏛️",
+      questionOptionId: "q1-opt2",
+      sortOrder: 3
+    },
 
     // Family templates
-    { id: uuidv4(), folderName: "Family Documents", description: "Family-related documents and records", folderIcon: "👨‍👩‍👧‍👦", questionOptionId: "q2-opt1", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Children's Documents", description: "Children's birth certificates, school records", folderIcon: "👶", questionOptionId: "q2-opt2", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Parents' Documents", description: "Parents' medical and care documents", folderIcon: "👴👵", questionOptionId: "q2-opt3", sortOrder: 1 },
+    {
+      id: uuidv4(),
+      folderName: "Family Documents",
+      description: "Family-related documents and records",
+      folderIcon: "👨‍👩‍👧‍👦",
+      questionOptionId: "q2-opt1",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Children's Documents",
+      description: "Children's birth certificates, school records",
+      folderIcon: "👶",
+      questionOptionId: "q2-opt2",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Parents' Documents",
+      description: "Parents' medical and care documents",
+      folderIcon: "👴👵",
+      questionOptionId: "q2-opt3",
+      sortOrder: 1
+    },
 
     // Employment templates
-    { id: uuidv4(), folderName: "Employment Records", description: "Work contracts, payslips, and HR documents", folderIcon: "💼", questionOptionId: "q3-opt1", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Business Documents", description: "Business registration, tax documents", folderIcon: "🏢", questionOptionId: "q3-opt4", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Freelance Work", description: "Freelance contracts and invoices", folderIcon: "💻", questionOptionId: "q3-opt3", sortOrder: 1 },
+    {
+      id: uuidv4(),
+      folderName: "Employment Records",
+      description: "Work contracts, payslips, and HR documents",
+      folderIcon: "💼",
+      questionOptionId: "q3-opt1",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Business Documents",
+      description: "Business registration, tax documents",
+      folderIcon: "🏢",
+      questionOptionId: "q3-opt4",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Freelance Work",
+      description: "Freelance contracts and invoices",
+      folderIcon: "💻",
+      questionOptionId: "q3-opt3",
+      sortOrder: 1
+    },
 
     // Investment templates
-    { id: uuidv4(), folderName: "Investment Portfolio", description: "Stocks, bonds, and investment records", folderIcon: "📈", questionOptionId: "q4-opt1", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Real Estate", description: "Property documents and mortgage records", folderIcon: "🏠", questionOptionId: "q4-opt4", sortOrder: 1 },
-    { id: uuidv4(), folderName: "Cryptocurrency", description: "Crypto wallet information and transactions", folderIcon: "₿", questionOptionId: "q4-opt5", sortOrder: 1 }
+    {
+      id: uuidv4(),
+      folderName: "Investment Portfolio",
+      description: "Stocks, bonds, and investment records",
+      folderIcon: "📈",
+      questionOptionId: "q4-opt1",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Real Estate",
+      description: "Property documents and mortgage records",
+      folderIcon: "🏠",
+      questionOptionId: "q4-opt4",
+      sortOrder: 1
+    },
+    {
+      id: uuidv4(),
+      folderName: "Cryptocurrency",
+      description: "Crypto wallet information and transactions",
+      folderIcon: "₿",
+      questionOptionId: "q4-opt5",
+      sortOrder: 1
+    }
   ],
 
   milestoneCategories: [
@@ -133,7 +238,7 @@ const seedData: SeedData = {
 async function seedDatabase(): Promise<void> {
   try {
     Logger.info("Starting database seeding...");
-    
+
     await mysqlDataSource.initialize();
     Logger.info("Database connected successfully");
 
@@ -154,41 +259,61 @@ async function seedDatabase(): Promise<void> {
     // Seed onboarding questions
     Logger.info("Seeding onboarding questions...");
     for (const question of seedData.questions) {
-      await mysqlDataSource.query(`
+      await mysqlDataSource.query(
+        `
         INSERT INTO onboarding_questions (id, questionText, questionType, sortOrder, isActive, description, isRequired, icon, createdAt, updatedAt)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-      `, [question.id, question.questionText, question.questionType, question.sortOrder, 1, question.description, question.isRequired, question.icon]);
+      `,
+        [
+          question.id,
+          question.questionText,
+          question.questionType,
+          question.sortOrder,
+          1,
+          question.description,
+          question.isRequired,
+          question.icon
+        ]
+      );
     }
 
     // Seed question options
     Logger.info("Seeding question options...");
     for (const option of seedData.questionOptions) {
-      await mysqlDataSource.query(`
+      await mysqlDataSource.query(
+        `
         INSERT INTO onboarding_question_options (id, questionId, optionText, optionValue, sortOrder, createdAt, updatedAt)
         VALUES (?, ?, ?, ?, ?, NOW(), NOW())
-      `, [option.id, option.questionId, option.optionText, option.optionValue, option.sortOrder]);
+      `,
+        [option.id, option.questionId, option.optionText, option.optionValue, option.sortOrder]
+      );
     }
 
     // Seed folder templates
     Logger.info("Seeding folder templates...");
     for (const template of seedData.folderTemplates) {
-      await mysqlDataSource.query(`
+      await mysqlDataSource.query(
+        `
         INSERT INTO folder_templates (id, folderName, description, folderIcon, questionOptionId, sortOrder, isActive, createdAt, updatedAt)
         VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-      `, [template.id, template.folderName, template.description, template.folderIcon, template.questionOptionId, template.sortOrder, 1]);
+      `,
+        [template.id, template.folderName, template.description, template.folderIcon, template.questionOptionId, template.sortOrder, 1]
+      );
     }
 
     // Seed milestone categories
     Logger.info("Seeding milestone categories...");
     for (const category of seedData.milestoneCategories) {
-      await mysqlDataSource.query(`
+      await mysqlDataSource.query(
+        `
         INSERT INTO milestone_categories (id, name, icon, color, description, createdAt, updatedAt)
         VALUES (?, ?, ?, ?, ?, NOW(), NOW())
-      `, [category.id, category.name, category.icon, category.color, category.description]);
+      `,
+        [category.id, category.name, category.icon, category.color, category.description]
+      );
     }
 
     Logger.info("Database seeding completed successfully!");
-
   } catch (error) {
     Logger.error("Error during database seeding:", error);
     throw error;

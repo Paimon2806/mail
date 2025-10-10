@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-  Index
-} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Index } from "typeorm";
 import { CustomBaseEntity } from "./CustomBaseEntity";
 import { User } from "./User";
 import { UserFolder } from "./UserFolder";
@@ -24,8 +17,8 @@ export class Bill extends CustomBaseEntity {
   @Column({ type: "decimal", precision: 10, scale: 2 })
   amount: number;
 
-  @Column({ 
-    type: "enum", 
+  @Column({
+    type: "enum",
     enum: ["weekly", "monthly", "quarterly", "yearly", "one-time"],
     default: "monthly"
   })
@@ -47,5 +40,4 @@ export class Bill extends CustomBaseEntity {
   @ManyToOne(() => UserFolder, { nullable: true })
   @JoinColumn({ name: "folderId" })
   folder?: UserFolder;
-
 }

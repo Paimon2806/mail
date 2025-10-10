@@ -31,7 +31,6 @@ export class CreateMilestoneCategoryDto {
   @Example(0)
   sortOrder?: number;
 
-
   @Property()
   @Example({ customField: "value" })
   metadata?: any;
@@ -71,7 +70,6 @@ export class UpdateMilestoneCategoryDto {
   @Example(0)
   sortOrder?: number;
 
-
   @Property()
   @Example({ customField: "value" })
   metadata?: any;
@@ -85,7 +83,6 @@ export class MilestoneCategorySearchDto {
   @Property()
   @Example("true")
   isActive?: string;
-
 
   @Property()
   @Example("Wedding")
@@ -145,7 +142,6 @@ export class MilestoneCategoryResponseDto {
   @Example("123e4567-e89b-12d3-a456-426614174000")
   userId?: string;
 
-
   @Property()
   @Example({ customField: "value" })
   metadata?: any;
@@ -161,7 +157,6 @@ export class MilestoneCategoryResponseDto {
   @Property()
   @Example(5)
   milestoneCount?: number;
-
 }
 
 export class MilestoneCategoryStatsDto {
